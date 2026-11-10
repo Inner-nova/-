@@ -6,11 +6,12 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 type Props = {
   allLabel: string;
   categories: { key: string; label: string }[];
+  gridClass: string;
   children: ReactNode;
 };
 
-/** 주제 칩으로 강의 목록을 걸러냅니다. 선택값은 주소(?category=)에 남아 공유할 수 있어요. */
-export function CategoryFilter({ allLabel, categories, children }: Props) {
+/** 주제 탭으로 강의 목록을 걸러냅니다. 선택값은 주소(?category=)에 남아 공유할 수 있어요. */
+export function CategoryFilter({ allLabel, categories, gridClass, children }: Props) {
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
@@ -28,22 +29,22 @@ export function CategoryFilter({ allLabel, categories, children }: Props) {
 
   return (
     <>
-      <div className="no-scrollbar -mx-4 mb-8 mt-6 flex gap-2 overflow-x-auto px-4 md:mx-0 md:px-0" role="group">
+      <div className="no-scrollbar -mx-4 mb-10 mt-8 flex gap-6 overflow-x-auto border-b border-line px-4 md:mx-0 md:px-0" role="group">
         {options.map((o) => (
           <button
             key={o.key}
             type="button"
             onClick={() => select(o.key)}
             aria-pressed={active === o.key}
-            className={`shrink-0 rounded-full border px-4 py-2 text-[15px] font-semibold transition ${
-              active === o.key ? "border-primary bg-primary text-white" : "border-line text-ink hover:border-primary hover:text-primary"
+            className={`-mb-px shrink-0 border-b-2 pb-3 font-serif text-[18px] font-semibold transition ${
+              active === o.key ? "border-gold text-ink" : "border-transparent text-muted hover:text-ink"
             }`}
           >
             {o.label}
           </button>
         ))}
       </div>
-      <div className="grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 md:gap-6 lg:grid-cols-4">{visible}</div>
+      <div className={gridClass}>{visible}</div>
     </>
   );
 }

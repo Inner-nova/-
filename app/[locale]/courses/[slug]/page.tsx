@@ -6,8 +6,7 @@ import { getDictionary, isLocale, locales, tr } from "@/lib/i18n";
 import { CourseActions, LessonCheck, ModuleCard } from "@/components/CourseProgress";
 import { LessonIcon } from "@/components/LessonIcon";
 import { Cover } from "@/components/Cover";
-import { Logo } from "@/components/Logo";
-import { CheckIcon } from "@/components/Icons";
+import { ChevronIcon } from "@/components/Icons";
 
 export function generateStaticParams() {
   return locales.flatMap((locale) => courses.map((c) => ({ locale, slug: c.slug })));
@@ -29,68 +28,72 @@ export default async function CoursePage({ params }: PageProps<"/[locale]/course
   const base = `/${locale}/courses/${course.slug}`;
 
   const facts = [
-    { k: `${course.modules.length}${locale === "ko" ? "" : " "}${d.course.weeks}`, v: tr(categories[course.category], locale) },
+    { k: `${course.modules.length}${locale === "ko" ? "" : " "}${d.course.weeks}`, v: d.course.level[course.level] },
     { k: `${lessons.length} ${d.course.lessons}`, v: `${totalMinutes(course)}${d.course.minutes}` },
-    { k: d.course.level[course.level], v: d.common.free },
+    { k: d.common.free, v: tr(categories[course.category], locale) },
   ];
 
   return (
     <>
-      <section className="border-b border-line bg-surface">
-        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-[1fr_22rem] md:px-6 md:py-14">
-          <div>
-            <div className="flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-white">
-                <Logo size={26} />
-              </span>
-              <span className="text-[16px] font-medium text-muted">{d.common.provider}</span>
+      <section className="px-4 pt-5 md:px-6 md:pt-8">
+        <div className="night relative mx-auto max-w-6xl overflow-hidden rounded-[28px]">
+          <div className="grid gap-10 px-6 py-10 md:grid-cols-[1fr_17rem] md:px-12 md:py-14">
+            <div>
+              <Link href={`/${locale}/courses`} className="inline-flex items-center gap-1 text-[13px] text-white/50 hover:text-white/80">
+                <ChevronIcon dir="left" size={14} /> {d.nav.courses}
+              </Link>
+              <p className="label-gold mt-6 !text-gold-light">
+                {tr(categories[course.category], locale)} · {d.course.level[course.level]}
+              </p>
+              <h1 className="mt-3 font-serif text-[36px] font-semibold leading-tight tracking-tight md:text-[48px]">
+                {tr(course.title, locale)}
+              </h1>
+              <p className="mt-2 font-serif text-[19px] italic text-gold-light/90">{tr(course.subtitle, locale)}</p>
+              <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-white/70">{tr(course.description, locale)}</p>
+              <div className="mt-8">
+                <CourseActions
+                  courseSlug={course.slug}
+                  lessonIds={lessons.map((l) => l.id)}
+                  basePath={base}
+                  labels={{ start: d.course.start, continue: d.course.continue, progress: d.course.progress }}
+                />
+              </div>
             </div>
-            <h1 className="mt-5 text-3xl font-bold leading-tight tracking-tight md:text-4xl">{tr(course.title, locale)}</h1>
-            <p className="mt-2 text-lg text-muted">{tr(course.subtitle, locale)}</p>
-            <p className="mt-5 max-w-2xl leading-relaxed text-ink/85">{tr(course.description, locale)}</p>
-            <div className="mt-8">
-              <CourseActions
-                courseSlug={course.slug}
-                lessonIds={lessons.map((l) => l.id)}
-                basePath={base}
-                labels={{ start: d.course.start, continue: d.course.continue, progress: d.course.progress }}
-              />
-            </div>
+            <Cover hue={course.hue} category={course.category} className="gold-frame hidden aspect-[4/5] rounded-[20px] md:block" />
           </div>
-          <Cover hue={course.hue} category={course.category} className="hidden aspect-[7/5] rounded-2xl md:block" />
-        </div>
-        <div className="mx-auto max-w-6xl px-4 pb-8 md:px-6">
-          <dl className="grid grid-cols-3 divide-x divide-line rounded-2xl border border-line bg-white py-4 text-center">
-            {facts.map((f) => (
-              <div key={f.k} className="px-2">
-                <dt className="text-[15px] font-bold">{f.k}</dt>
-                <dd className="mt-0.5 text-sm text-muted">{f.v}</dd>
+          <dl className="grid grid-cols-3 border-t border-white/10">
+            {facts.map((f, i) => (
+              <div key={f.k} className={`px-3 py-5 text-center ${i > 0 ? "border-l border-white/10" : ""}`}>
+                <dt className="font-serif text-[18px] font-semibold text-gold-light">{f.k}</dt>
+                <dd className="mt-0.5 text-[12px] tracking-wide text-white/55">{f.v}</dd>
               </div>
             ))}
           </dl>
         </div>
       </section>
 
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-10 md:px-6 lg:grid-cols-[1fr_20rem]">
+      <div className="mx-auto grid max-w-6xl gap-12 px-4 py-14 md:px-6 lg:grid-cols-[1fr_20rem]">
         <section>
-          <h2 className="text-2xl font-bold tracking-tight">{d.course.curriculum}</h2>
-          <div className="mt-5 space-y-4">
+          <p className="eyebrow">CURRICULUM</p>
+          <h2 className="mt-1.5 font-serif text-[30px] font-semibold">{d.course.curriculum}</h2>
+          <div className="mt-6 space-y-4">
             {course.modules.map((m, mi) => (
               <ModuleCard
                 key={mi}
+                index={mi}
                 courseSlug={course.slug}
                 basePath={base}
                 title={tr(m.title, locale)}
                 lessonIds={m.lessons.map((l) => l.id)}
                 labels={d.my}
               >
-                <ul className="border-t border-line">
+                <ul className="border-t border-line/80">
                   {m.lessons.map((l) => (
-                    <li key={l.id} className="border-b border-line last:border-0">
-                      <Link href={`${base}/learn/${l.id}`} className="flex items-center gap-3 px-5 py-3.5 transition hover:bg-surface">
+                    <li key={l.id}>
+                      <Link href={`${base}/learn/${l.id}`} className="flex items-center gap-3.5 px-5 py-3.5 transition hover:bg-surface/70">
                         <LessonCheck courseSlug={course.slug} lessonId={l.id} />
                         <span className="flex-1 text-[15px]">{tr(l.title, locale)}</span>
-                        <span className="flex shrink-0 items-center gap-1.5 text-sm text-muted">
+                        <span className="flex shrink-0 items-center gap-1.5 text-[12.5px] text-muted">
                           <LessonIcon type={l.type} />
                           {l.minutes}
                           {d.course.minutes}
@@ -104,21 +107,21 @@ export default async function CoursePage({ params }: PageProps<"/[locale]/course
           </div>
         </section>
 
-        <aside className="space-y-4">
-          <div className="rounded-2xl border border-line p-6">
-            <h2 className="text-lg font-bold">{d.course.outcomes}</h2>
-            <ul className="mt-4 space-y-3 text-[15px]">
+        <aside className="space-y-8 lg:pt-12">
+          <div>
+            <h2 className="label-gold">{d.course.outcomes}</h2>
+            <ul className="mt-4 space-y-3.5 text-[15px]">
               {course.outcomes.map((o, i) => (
-                <li key={i} className="flex gap-2.5">
-                  <CheckIcon size={18} className="mt-0.5 shrink-0 text-primary" strokeWidth={2.5} />
+                <li key={i} className="flex gap-3 border-b border-line/80 pb-3.5">
+                  <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rotate-45 bg-gold" aria-hidden />
                   {tr(o, locale)}
                 </li>
               ))}
             </ul>
           </div>
-          <div className="rounded-2xl border border-line p-6">
-            <h2 className="text-lg font-bold">{d.course.instructor}</h2>
-            <p className="mt-3 text-[15px] text-muted">{d.course.instructorBody}</p>
+          <div className="rounded-[22px] border border-gold/30 bg-white/70 p-6">
+            <h2 className="label-gold">{d.course.instructor}</h2>
+            <p className="mt-3 font-serif text-[18px] italic leading-snug">{d.course.instructorBody}</p>
           </div>
         </aside>
       </div>

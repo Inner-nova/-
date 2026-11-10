@@ -30,13 +30,13 @@ const js = await build({
   external: ["*.css"],
 });
 
-const globals = readFileSync(path.join(root, "app", "globals.css"), "utf8").replace(/^@import "pretendard[^\n]*\n/, "");
+const globals = readFileSync(path.join(root, "app", "globals.css"), "utf8").replace(/^@import "(?!tailwindcss)[^\n]*\n/gm, "");
 const css = await postcss([tailwind({ base: root })]).process(globals, { from: path.join(root, "app", "globals.css") });
 
 const html = `<title>아루벤 Aruben</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Serif+KR:wght@600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap">
 <style>
 ${css.css}
 :root { --font-sans: "Pretendard Variable", Pretendard, "Noto Sans KR", -apple-system, BlinkMacSystemFont, system-ui, sans-serif; }

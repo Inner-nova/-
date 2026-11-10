@@ -14,10 +14,11 @@ export default async function LibraryPage({ params }: PageProps<"/[locale]/libra
   if (!isLocale(locale)) notFound();
   const d = getDictionary(locale);
   return (
-    <div className="mx-auto max-w-6xl px-4 pt-8 md:px-6 md:pt-12">
-      <h1 className="text-4xl font-bold tracking-tight">{d.library.title}</h1>
+    <div className="mx-auto max-w-6xl px-4 pt-10 md:px-6 md:pt-14">
+      <p className="eyebrow">FREE LIBRARY</p>
+      <h1 className="mt-2 font-serif text-[40px] font-semibold leading-tight tracking-tight">{d.library.title}</h1>
       <p className="mt-2 text-muted">{d.library.body}</p>
-      <div className="mt-8 grid gap-4 md:grid-cols-2">
+      <div className="mt-10 grid gap-5 md:grid-cols-2">
         {ebooks.map((e) => (
           <EbookRow key={e.slug} ebook={e} locale={locale} d={d} />
         ))}

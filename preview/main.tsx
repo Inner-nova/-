@@ -64,7 +64,7 @@ function App() {
   }, [path, locale]);
 
   return (
-    <div className="flex min-h-screen flex-col pb-24 font-sans md:pb-0">
+    <div className="flex min-h-screen flex-col pb-28 font-sans md:pb-0">
       <Header locale={locale} d={d} />
       <main className="flex-1">{content}</main>
       <Footer d={d} />

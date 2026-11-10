@@ -27,8 +27,8 @@ export function SearchClient({
 
   return (
     <div className="mt-6">
-      <label className="flex items-center gap-3 rounded-2xl border-2 border-line px-4 py-3 focus-within:border-primary">
-        <SearchIcon size={22} className="text-muted" />
+      <label className="flex items-center gap-3 rounded-full border border-gold/40 bg-white/80 px-5 py-3.5 shadow-[0_10px_30px_-20px_rgba(60,30,110,0.5)] focus-within:border-gold">
+        <SearchIcon size={20} className="text-gold" />
         <input
           type="search"
           value={q}
@@ -42,14 +42,14 @@ export function SearchClient({
 
       {!query && (
         <div className="mt-8">
-          <h2 className="text-lg font-bold">{labels.suggestions}</h2>
+          <h2 className="label-gold">{labels.suggestions}</h2>
           <div className="mt-3 flex flex-wrap gap-2">
             {suggestionList.map((s) => (
               <button
                 key={s}
                 type="button"
                 onClick={() => setQ(s)}
-                className="rounded-full border border-line px-4 py-2 text-[15px] font-medium hover:border-primary hover:text-primary"
+                className="btn-ghost font-serif !text-[16px]"
               >
                 {s}
               </button>
@@ -67,9 +67,9 @@ export function SearchClient({
             {results.map((r) => (
               <li key={r.href}>
                 <Link href={r.href} className="flex items-center gap-4 py-4 hover:opacity-80">
-                  <span className="cover h-16 w-20 shrink-0 rounded-lg" style={{ ["--hue" as string]: r.hue }} />
+                  <span className="cover gold-frame h-16 w-14 shrink-0 rounded-xl" style={{ ["--hue" as string]: r.hue }} />
                   <span className="min-w-0">
-                    <span className="block text-[17px] font-semibold">{r.title}</span>
+                    <span className="block font-serif text-[19px] font-semibold">{r.title}</span>
                     <span className="mt-0.5 block truncate text-sm text-muted">{r.sub}</span>
                   </span>
                 </Link>

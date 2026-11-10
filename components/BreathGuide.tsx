@@ -22,20 +22,21 @@ export function BreathGuide({ labels }: { labels: Labels }) {
   }, [running, phase]);
 
   const current = PHASES[phase].key;
-  const scale = !running ? 0.6 : current === "exhale" ? 0.55 : 1;
+  const scale = !running ? 0.62 : current === "exhale" ? 0.55 : 1;
 
   return (
-    <div className="flex flex-col items-center rounded-2xl border border-line bg-surface px-6 py-10">
-      <div className="relative flex h-56 w-56 items-center justify-center">
-        <div className="absolute inset-0 rounded-full border border-primary/25" />
+    <div className="night flex flex-col items-center overflow-hidden rounded-[26px] px-6 py-12">
+      <div className="relative flex h-60 w-60 items-center justify-center">
+        <div className="absolute inset-0 rounded-full border border-gold-light/30" />
+        <div className="absolute inset-6 rounded-full border border-white/10" />
         <div
-          className="absolute inset-4 rounded-full bg-gradient-to-br from-primary-soft via-white to-primary/25 shadow-inner"
+          className="absolute inset-5 rounded-full bg-[radial-gradient(circle_at_40%_35%,rgba(255,240,215,0.95),rgba(190,160,235,0.55)_45%,rgba(120,80,190,0.15)_75%)] shadow-[0_0_60px_rgba(200,170,255,0.35)]"
           style={{
             transform: `scale(${scale})`,
             transition: `transform ${running ? PHASES[phase].ms : 600}ms ease-in-out`,
           }}
         />
-        <span className="relative text-lg font-semibold text-primary" aria-live="polite">
+        <span className="relative font-serif text-[22px] font-semibold text-night" aria-live="polite">
           {running ? labels[current] : ""}
         </span>
       </div>
@@ -45,7 +46,7 @@ export function BreathGuide({ labels }: { labels: Labels }) {
           setPhase(0);
           setRunning((r) => !r);
         }}
-        className="mt-6 rounded-full border border-primary/40 bg-white px-5 py-2 text-sm font-bold text-primary transition hover:bg-primary-soft"
+        className="btn-ghost-dark mt-8"
       >
         {running ? labels.stop : labels.start}
       </button>

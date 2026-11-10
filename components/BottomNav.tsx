@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { BookIcon, CapIcon, CompassIcon, LearnIcon, SearchIcon } from "./Icons";
 
-/** 모바일 하단 탭바 (데스크톱에서는 숨김) */
+/** 모바일 하단 탭바: 밤하늘색 바, 선택된 탭은 금빛 아이콘과 점으로 표시 (데스크톱에서는 숨김) */
 export function BottomNav({ locale, d }: { locale: Locale; d: Dictionary }) {
   const pathname = usePathname() ?? "";
   const tabs = [
@@ -18,11 +18,11 @@ export function BottomNav({ locale, d }: { locale: Locale; d: Dictionary }) {
 
   return (
     <nav
-      className="fixed inset-x-3 bottom-3 z-40 md:hidden"
-      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+      className="fixed inset-x-0 bottom-0 z-40 px-4 md:hidden"
+      style={{ paddingBottom: "max(12px, env(safe-area-inset-bottom))" }}
       aria-label="Main"
     >
-      <ul className="flex items-stretch justify-between rounded-[28px] border border-white/70 bg-white/80 p-1.5 shadow-[0_8px_30px_rgba(90,60,170,0.18)] backdrop-blur-xl">
+      <ul className="flex items-stretch justify-between rounded-[26px] bg-night/95 px-2 py-2 shadow-[0_12px_36px_-8px_rgba(27,19,49,0.55)] ring-1 ring-gold/25 backdrop-blur-xl">
         {tabs.map(({ href, label, Icon, exact }) => {
           const active = exact ? pathname === href : pathname.startsWith(href);
           return (
@@ -30,12 +30,13 @@ export function BottomNav({ locale, d }: { locale: Locale; d: Dictionary }) {
               <Link
                 href={href}
                 aria-current={active ? "page" : undefined}
-                className={`flex flex-col items-center gap-0.5 rounded-[22px] py-1.5 text-[11px] font-medium transition ${
-                  active ? "bg-primary-soft text-primary" : "text-ink"
+                className={`flex flex-col items-center gap-1 py-1 text-[10.5px] font-medium tracking-wide transition ${
+                  active ? "text-gold-light" : "text-white/55 hover:text-white/80"
                 }`}
               >
-                <Icon size={24} />
+                <Icon size={22} strokeWidth={active ? 1.9 : 1.5} />
                 {label}
+                <span className={`h-1 w-1 rounded-full ${active ? "bg-gold-light" : "bg-transparent"}`} aria-hidden />
               </Link>
             </li>
           );

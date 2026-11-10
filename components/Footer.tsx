@@ -1,16 +1,17 @@
 import type { Dictionary } from "@/lib/i18n";
-import { Logo } from "./Logo";
+import { Wordmark } from "./Logo";
 
 export function Footer({ d }: { d: Dictionary }) {
   return (
-    <footer className="mt-20 border-t border-line bg-surface">
-      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-10 text-sm text-muted md:px-6">
-        <div className="mb-1 flex items-center gap-2 text-base font-bold text-ink">
-          <Logo size={22} /> {d.brand}
-        </div>
+    <footer className="night mt-24">
+      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-12 text-sm text-white/60 md:px-6">
+        <Wordmark brand={d.brand} light />
+        <p className="mt-2 font-serif text-lg italic text-gold-light/90">{d.tagline}</p>
         <p>{d.footer.about}</p>
         <p>{d.footer.contact}</p>
-        <p className="text-xs">© {new Date().getFullYear()} {d.brand}</p>
+        <p className="mt-4 border-t border-white/10 pt-4 text-xs tracking-wide text-white/40">
+          © {new Date().getFullYear()} {d.brand}
+        </p>
       </div>
     </footer>
   );

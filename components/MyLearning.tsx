@@ -3,11 +3,16 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useProgress } from "@/lib/progress";
-import { ModuleCard, type ModuleLabels } from "./CourseProgress";
-import { ChevronIcon } from "./Icons";
-import { Logo } from "./Logo";
+import { ModuleCard, ProgressRing, useCourseState, type ModuleLabels } from "./CourseProgress";
+import { ArrowIcon, ChevronIcon } from "./Icons";
 
-type CourseSummary = { slug: string; title: string; modules: { title: string; lessonIds: string[] }[] };
+type CourseSummary = {
+  slug: string;
+  title: string;
+  category: string;
+  hue: number;
+  modules: { title: string; lessonIds: string[] }[];
+};
 type Labels = ModuleLabels & {
   note: string;
   empty: string;
@@ -16,8 +21,8 @@ type Labels = ModuleLabels & {
   reset: string;
   collapse: string;
   expand: string;
-  provider: string;
-  course: string;
+  resume: string;
+  overall: string;
 };
 
 export function MyLearning({ locale, courses, labels }: { locale: string; courses: CourseSummary[]; labels: Labels }) {
@@ -29,14 +34,11 @@ export function MyLearning({ locale, courses, labels }: { locale: string; course
 
   if (started.length === 0) {
     return (
-      <div className="mt-10 rounded-2xl border border-line bg-surface px-6 py-14 text-center">
-        <p className="text-lg font-bold">{labels.empty}</p>
-        <p className="mt-2 text-muted">{labels.emptyBody}</p>
-        <Link
-          href={`/${locale}/courses`}
-          className="mt-6 inline-block rounded-xl bg-primary px-6 py-3 text-[15px] font-bold text-white hover:bg-primary-dark"
-        >
-          {labels.browse}
+      <div className="night mt-10 rounded-[26px] px-6 py-14 text-center">
+        <p className="font-serif text-[24px] font-semibold">{labels.empty}</p>
+        <p className="mt-2 text-white/65">{labels.emptyBody}</p>
+        <Link href={`/${locale}/courses`} className="btn-primary mt-7">
+          {labels.browse} <ArrowIcon size={16} />
         </Link>
       </div>
     );
@@ -44,13 +46,13 @@ export function MyLearning({ locale, courses, labels }: { locale: string; course
 
   return (
     <>
-      <div className="mt-6 divide-y divide-line">
+      <div className="mt-8 space-y-6">
         {started.map((c) => (
           <CourseGroup key={c.slug} locale={locale} course={c} labels={labels} />
         ))}
       </div>
-      <p className="mt-6 rounded-xl bg-surface px-4 py-3 text-sm text-muted">{labels.note}</p>
-      <button type="button" onClick={reset} className="mt-4 text-sm text-muted underline hover:text-ink">
+      <p className="mt-8 text-[13px] leading-relaxed text-muted">{labels.note}</p>
+      <button type="button" onClick={reset} className="mt-3 text-[13px] text-muted underline decoration-gold/50 underline-offset-4 hover:text-ink">
         {labels.reset}
       </button>
     </>
@@ -60,43 +62,45 @@ export function MyLearning({ locale, courses, labels }: { locale: string; course
 function CourseGroup({ locale, course, labels }: { locale: string; course: CourseSummary; labels: Labels }) {
   const [open, setOpen] = useState(true);
   const base = `/${locale}/courses/${course.slug}`;
+  const allIds = course.modules.flatMap((m) => m.lessonIds);
+  const { pct, next } = useCourseState(course.slug, allIds);
+
   return (
-    <section className="py-8">
-      <div className="flex items-center gap-3">
-        <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-line">
-          <Logo size={26} />
-        </span>
-        <span className="text-[16px] text-muted">{labels.provider}</span>
+    <section className="overflow-hidden rounded-[26px] border border-line bg-white/60">
+      <div className="night flex items-center gap-4 px-5 py-5">
+        <span className="cover gold-frame h-16 w-14 shrink-0 rounded-xl" style={{ ["--hue" as string]: course.hue }} />
+        <div className="min-w-0 flex-1">
+          <p className="label-gold !text-gold-light">{course.category}</p>
+          <Link href={base} className="mt-1 block font-serif text-[21px] font-semibold leading-snug hover:underline">
+            {course.title}
+          </Link>
+        </div>
+        <ProgressRing value={pct} size={52} dark />
       </div>
-      <Link href={base} className="mt-3 block text-xl font-bold hover:underline">
-        {course.title}
-      </Link>
-      <p className="mt-1 text-[15px] text-muted">{labels.course}</p>
+
+      <div className="flex flex-wrap items-center justify-between gap-3 px-5 pt-5">
+        <Link href={`${base}/learn/${next}`} className="btn-primary">
+          {labels.resume} <ArrowIcon size={16} />
+        </Link>
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          className="flex items-center gap-1.5 text-[13px] font-semibold tracking-wide text-muted hover:text-ink"
+        >
+          {open ? labels.collapse : labels.expand}
+          <ChevronIcon dir={open ? "up" : "down"} size={16} />
+        </button>
+      </div>
 
       {open && (
-        <div className="mt-5 space-y-4">
+        <div className="space-y-3 p-5">
           {course.modules.map((m, i) => (
-            <ModuleCard
-              key={i}
-              courseSlug={course.slug}
-              basePath={base}
-              title={m.title}
-              lessonIds={m.lessonIds}
-              labels={labels}
-              highlight
-            />
+            <ModuleCard key={i} index={i} courseSlug={course.slug} basePath={base} title={m.title} lessonIds={m.lessonIds} labels={labels} />
           ))}
         </div>
       )}
-      <button
-        type="button"
-        onClick={() => setOpen((o) => !o)}
-        aria-expanded={open}
-        className="mx-auto mt-5 flex items-center gap-2 text-[16px] font-medium"
-      >
-        <ChevronIcon dir={open ? "up" : "down"} size={20} strokeWidth={2.2} />
-        {open ? labels.collapse : labels.expand}
-      </button>
+      {!open && <div className="h-5" />}
     </section>
   );
 }

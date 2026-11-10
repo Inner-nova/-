@@ -10,7 +10,7 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-export const viewport: Viewport = { themeColor: "#fdfcff", viewportFit: "cover" };
+export const viewport: Viewport = { themeColor: "#fbf9fc", viewportFit: "cover" };
 
 export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
@@ -30,7 +30,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
 
   return (
     <html lang={locale}>
-      <body className="flex min-h-screen flex-col pb-24 font-sans md:pb-0">
+      <body className="flex min-h-screen flex-col pb-28 font-sans md:pb-0">
         <Header locale={locale} d={d} />
         <main className="flex-1">{children}</main>
         <Footer d={d} />

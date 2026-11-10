@@ -39,18 +39,18 @@ export default async function LessonPage({ params }: P) {
   const next = all[index + 1];
 
   return (
-    <div className="mx-auto grid max-w-6xl gap-8 px-4 py-6 md:px-6 md:py-8 lg:grid-cols-[19rem_1fr]">
+    <div className="mx-auto grid max-w-6xl gap-10 px-4 py-8 md:px-6 lg:grid-cols-[18rem_1fr]">
       <aside className="order-2 lg:order-1">
-        <div className="sticky top-24 overflow-hidden rounded-2xl border border-line">
-          <Link href={base} className="flex items-center gap-1 border-b border-line px-5 py-4 text-sm text-muted hover:text-ink">
-            <ChevronIcon dir="left" size={16} />
+        <div className="sticky top-24 overflow-hidden rounded-[22px] border border-line bg-white/80">
+          <Link href={base} className="flex items-center gap-1 px-5 pt-5 text-[13px] text-muted hover:text-ink">
+            <ChevronIcon dir="left" size={14} />
             {d.lesson.backToCourse}
           </Link>
-          <p className="px-5 pt-4 text-lg font-bold">{tr(course.title, locale)}</p>
-          <nav className="max-h-[60vh] overflow-y-auto pb-2">
+          <p className="px-5 pb-2 pt-2 font-serif text-[21px] font-semibold leading-snug">{tr(course.title, locale)}</p>
+          <nav className="max-h-[60vh] overflow-y-auto pb-3">
             {course.modules.map((m, mi) => (
               <div key={mi} className="pt-3">
-                <p className="px-5 pb-1.5 text-[13px] font-semibold text-muted">{tr(m.title, locale)}</p>
+                <p className="px-5 pb-1.5 text-[10.5px] font-semibold tracking-[0.04em] text-gold">{tr(m.title, locale)}</p>
                 {m.lessons.map((l) => {
                   const active = l.id === lesson.id;
                   return (
@@ -58,8 +58,8 @@ export default async function LessonPage({ params }: P) {
                       key={l.id}
                       href={`${base}/learn/${l.id}`}
                       aria-current={active ? "page" : undefined}
-                      className={`flex items-center gap-3 border-l-4 px-4 py-2.5 text-[15px] transition ${
-                        active ? "border-primary bg-primary-soft font-semibold" : "border-transparent hover:bg-surface"
+                      className={`mx-2 flex items-center gap-3 rounded-xl px-3 py-2.5 text-[14.5px] transition ${
+                        active ? "bg-surface font-semibold" : "hover:bg-surface/60"
                       }`}
                     >
                       <LessonCheck courseSlug={course.slug} lessonId={l.id} />
@@ -75,43 +75,50 @@ export default async function LessonPage({ params }: P) {
 
       <article className="order-1 min-w-0 lg:order-2">
         {lesson.type === "video" && (
-          <Cover hue={course.hue} className="flex aspect-video items-center justify-center rounded-2xl text-white">
+          <Cover hue={course.hue} className="gold-frame mb-8 flex aspect-video items-center justify-center rounded-[22px]">
             <div className="relative flex flex-col items-center gap-3">
-              <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-primary shadow-lg">
-                <PlayIcon size={30} />
+              <span className="flex h-16 w-16 items-center justify-center rounded-full border border-gold-light/70 bg-night/40 text-gold-light backdrop-blur">
+                <PlayIcon size={26} />
               </span>
-              <span className="rounded-full bg-black/35 px-3 py-1 text-sm">{d.lesson.videoSoon}</span>
+              <span className="text-[12px] tracking-[0.16em] text-white/80">{d.lesson.videoSoon}</span>
             </div>
           </Cover>
         )}
 
-        <div className="mt-6 flex items-center gap-2 text-sm text-muted">
-          <LessonIcon type={lesson.type} />
-          {d.lesson.type[lesson.type]} · {lesson.minutes}
-          {d.course.minutes}
-          <span className="ml-auto rounded-full bg-surface px-2.5 py-0.5 font-medium">
-            {index + 1} / {all.length}
+        <div className="flex items-center gap-3 text-[12px] font-semibold tracking-[0.06em] text-gold">
+          <span className="flex items-center gap-1.5">
+            <LessonIcon type={lesson.type} />
+            {d.lesson.type[lesson.type].toUpperCase()}
+          </span>
+          <span className="text-line">|</span>
+          <span>
+            {lesson.minutes}
+            {d.course.minutes.toUpperCase()}
+          </span>
+          <span className="ml-auto font-serif text-[15px] tracking-normal text-muted">
+            {String(index + 1).padStart(2, "0")} / {String(all.length).padStart(2, "0")}
           </span>
         </div>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight">{tr(lesson.title, locale)}</h1>
+        <h1 className="mt-3 font-serif text-[34px] font-semibold leading-tight tracking-tight md:text-[42px]">{tr(lesson.title, locale)}</h1>
+        <div className="mt-5 h-px w-16 bg-gold/60" />
 
-        <div className="mt-6 space-y-5 text-[17px] leading-8 text-ink/90">
+        <div className="mt-7 max-w-[38rem] space-y-6 text-[17px] leading-[1.95] text-ink/85">
           {lesson.body[locale].map((p, i) => (
             <p key={i}>{p}</p>
           ))}
         </div>
 
         {lesson.breathGuide && (
-          <div className="mt-10">
+          <div className="mt-12">
             <BreathGuide labels={d.lesson.breath} />
           </div>
         )}
 
         {lesson.practice && (
-          <div className="mt-10 rounded-2xl border border-primary/25 bg-primary-soft p-6">
-            <p className="text-sm font-bold text-primary">{d.lesson.practice}</p>
-            <p className="mt-2 text-[16px]">{tr(lesson.practice, locale)}</p>
-          </div>
+          <aside className="mt-12 rounded-[22px] border border-gold/35 bg-white/70 px-6 py-6 md:px-8">
+            <p className="label-gold">{d.lesson.practice}</p>
+            <p className="mt-3 font-serif text-[21px] font-medium italic leading-snug">{tr(lesson.practice, locale)}</p>
+          </aside>
         )}
 
         <LessonCompleteBar
@@ -120,30 +127,30 @@ export default async function LessonPage({ params }: P) {
           labels={{ mark: d.lesson.markComplete, done: d.lesson.completed }}
         />
 
-        <div className="mt-6 grid grid-cols-2 gap-3">
+        <nav className="mt-10 flex justify-between gap-4 border-t border-line pt-6">
           {prev ? (
-            <Link href={`${base}/learn/${prev.id}`} className="rounded-xl border border-line px-4 py-3 text-sm hover:border-primary">
-              <span className="flex items-center gap-1 text-muted">
-                <ChevronIcon dir="left" size={14} /> {d.lesson.prev}
+            <Link href={`${base}/learn/${prev.id}`} className="group max-w-[48%]">
+              <span className="flex items-center gap-1 text-[11px] font-semibold tracking-[0.16em] text-gold">
+                <ChevronIcon dir="left" size={13} /> {d.lesson.prev.toUpperCase()}
               </span>
-              <span className="mt-0.5 block font-semibold">{tr(prev.title, locale)}</span>
+              <span className="mt-1 block font-serif text-[17px] font-semibold group-hover:underline">{tr(prev.title, locale)}</span>
             </Link>
           ) : (
             <span />
           )}
           {next ? (
-            <Link href={`${base}/learn/${next.id}`} className="rounded-xl border border-line px-4 py-3 text-right text-sm hover:border-primary">
-              <span className="flex items-center justify-end gap-1 text-muted">
-                {d.lesson.next} <ChevronIcon dir="right" size={14} />
+            <Link href={`${base}/learn/${next.id}`} className="group max-w-[48%] text-right">
+              <span className="flex items-center justify-end gap-1 text-[11px] font-semibold tracking-[0.16em] text-gold">
+                {d.lesson.next.toUpperCase()} <ChevronIcon dir="right" size={13} />
               </span>
-              <span className="mt-0.5 block font-semibold">{tr(next.title, locale)}</span>
+              <span className="mt-1 block font-serif text-[17px] font-semibold group-hover:underline">{tr(next.title, locale)}</span>
             </Link>
           ) : (
-            <Link href={base} className="flex items-center justify-end rounded-xl border border-line px-4 py-3 text-sm font-semibold hover:border-primary">
-              {d.lesson.backToCourse}
+            <Link href={base} className="link-gold">
+              {d.lesson.backToCourse} <span aria-hidden>→</span>
             </Link>
           )}
-        </div>
+        </nav>
       </article>
     </div>
   );

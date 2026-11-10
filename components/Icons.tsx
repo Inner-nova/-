@@ -106,3 +106,10 @@ export const InquiryIcon = (p: P) => (
     <circle cx="12" cy="12" r="1.2" fill="currentColor" />
   </Base>
 );
+
+export const ArrowIcon = (p: P) => (
+  <Base {...p}>
+    <path d="M4.5 12h15" />
+    <path d="m13.5 6 6 6-6 6" />
+  </Base>
+);

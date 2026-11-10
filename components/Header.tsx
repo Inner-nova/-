@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import { Logo } from "./Logo";
+import { Wordmark } from "./Logo";
 import { SearchIcon } from "./Icons";
 
 export function Header({ locale, d }: { locale: Locale; d: Dictionary }) {
@@ -12,15 +12,18 @@ export function Header({ locale, d }: { locale: Locale; d: Dictionary }) {
     { href: `/${locale}/my`, label: d.nav.my },
   ];
   return (
-    <header className="sticky top-0 z-30 border-b border-line bg-white/75 backdrop-blur-md">
-      <div className="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4 md:h-16 md:px-6">
-        <Link href={`/${locale}`} className="flex items-center gap-2 text-lg font-bold tracking-tight">
-          <Logo />
-          {d.brand}
+    <header className="sticky top-0 z-30 border-b border-line/70 bg-ivory/80 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 md:px-6">
+        <Link href={`/${locale}`} aria-label={d.brand}>
+          <Wordmark brand={d.brand} />
         </Link>
-        <nav className="ml-6 hidden items-center gap-1 text-[15px] md:flex">
+        <nav className="ml-8 hidden items-center gap-7 text-[14px] md:flex">
           {nav.map((n) => (
-            <Link key={n.href} href={n.href} className="rounded-lg px-3 py-2 font-medium text-muted transition hover:bg-surface hover:text-ink">
+            <Link
+              key={n.href}
+              href={n.href}
+              className="relative py-2 font-medium text-muted transition after:absolute after:inset-x-0 after:bottom-0.5 after:h-px after:origin-left after:scale-x-0 after:bg-gold after:transition hover:text-ink hover:after:scale-x-100"
+            >
               {n.label}
             </Link>
           ))}
@@ -29,9 +32,9 @@ export function Header({ locale, d }: { locale: Locale; d: Dictionary }) {
           <Link
             href={`/${locale}/search`}
             aria-label={d.nav.search}
-            className="hidden h-9 w-9 items-center justify-center rounded-full text-muted transition hover:bg-surface hover:text-ink md:flex"
+            className="hidden h-9 w-9 items-center justify-center rounded-full text-muted transition hover:text-ink md:flex"
           >
-            <SearchIcon size={20} />
+            <SearchIcon size={19} />
           </Link>
           <LanguageSwitcher locale={locale} />
         </div>

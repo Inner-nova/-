@@ -23,16 +23,16 @@ export function LessonCompleteBar({
   }, [courseSlug, lessonId, visit]);
 
   return (
-    <button
-      type="button"
-      onClick={() => setComplete(courseSlug, lessonId, !done)}
-      aria-pressed={done}
-      className={`mt-10 flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-[16px] font-bold transition ${
-        done ? "border-2 border-primary/40 bg-primary-soft text-primary" : "bg-primary text-white hover:bg-primary-dark"
-      }`}
-    >
-      {done && <CheckIcon size={18} strokeWidth={3} />}
-      {done ? labels.done : labels.mark}
-    </button>
+    <div className="mt-12 flex justify-center">
+      <button
+        type="button"
+        onClick={() => setComplete(courseSlug, lessonId, !done)}
+        aria-pressed={done}
+        className={done ? "btn-ghost !px-6 !py-3 !text-[15px] text-gold" : "btn-primary"}
+      >
+        <CheckIcon size={17} strokeWidth={2.4} />
+        {done ? labels.done : labels.mark}
+      </button>
+    </div>
   );
 }

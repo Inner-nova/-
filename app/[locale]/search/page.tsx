@@ -38,8 +38,9 @@ export default async function SearchPage({ params }: PageProps<"/[locale]/search
   ];
 
   return (
-    <div className="mx-auto max-w-3xl px-4 pt-6 md:px-6 md:pt-12">
-      <h1 className="text-4xl font-bold tracking-tight">{d.search.title}</h1>
+    <div className="mx-auto max-w-3xl px-4 pt-10 md:px-6 md:pt-14">
+      <p className="eyebrow">SEARCH</p>
+      <h1 className="mt-2 font-serif text-[40px] font-semibold leading-tight tracking-tight">{d.search.title}</h1>
       <SearchClient
         items={items}
         labels={{
