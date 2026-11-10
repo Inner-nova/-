@@ -129,3 +129,19 @@ export const BondIcon = (p: P) => (
     <circle cx="15" cy="12" r="6" />
   </Base>
 );
+
+/* 탐색: 네 갈래 반짝이는 별 */
+export const SparkleIcon = (p: P) => (
+  <Base {...p}>
+    <path d="M12 2.5c.5 4.6 2.4 7 7.5 9.5-5.1 2.5-7 4.9-7.5 9.5-.5-4.6-2.4-7-7.5-9.5 5.1-2.5 7-4.9 7.5-9.5Z" />
+    <path d="M19 3v3M17.5 4.5h3" />
+  </Base>
+);
+
+/* 훈련: 차오르는 초승달 */
+export const MoonIcon = (p: P) => (
+  <Base {...p}>
+    <path d="M19.5 15.2A8.5 8.5 0 0 1 8.8 4.5a8.5 8.5 0 1 0 10.7 10.7Z" />
+    <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+  </Base>
+);
