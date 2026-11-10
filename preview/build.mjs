@@ -33,7 +33,7 @@ const js = await build({
 const globals = readFileSync(path.join(root, "app", "globals.css"), "utf8").replace(/^@import "(?!tailwindcss)[^\n]*\n/gm, "");
 const css = await postcss([tailwind({ base: root })]).process(globals, { from: path.join(root, "app", "globals.css") });
 
-const html = `<title>아루벤 Aruben</title>
+const html = `<title>Aruven 아루벤</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Noto+Serif+KR:wght@600&family=Noto+Sans+KR:wght@400;500;600;700&display=swap">

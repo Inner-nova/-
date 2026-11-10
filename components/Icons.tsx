@@ -113,3 +113,19 @@ export const ArrowIcon = (p: P) => (
     <path d="m13.5 6 6 6-6 6" />
   </Base>
 );
+
+/* 감정 훈련: 물결 */
+export const WaveIcon = (p: P) => (
+  <Base {...p}>
+    <path d="M2.5 9c2.4 0 2.4-2.5 4.75-2.5S9.6 9 12 9s2.4-2.5 4.75-2.5S19.1 9 21.5 9" />
+    <path d="M2.5 15c2.4 0 2.4-2.5 4.75-2.5S9.6 15 12 15s2.4-2.5 4.75-2.5S19.1 15 21.5 15" />
+  </Base>
+);
+
+/* 관계 실전: 겹친 두 원 */
+export const BondIcon = (p: P) => (
+  <Base {...p}>
+    <circle cx="9" cy="12" r="6" />
+    <circle cx="15" cy="12" r="6" />
+  </Base>
+);

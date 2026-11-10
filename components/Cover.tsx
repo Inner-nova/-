@@ -1,10 +1,10 @@
 import type { Category } from "@/lib/content";
-import { InquiryIcon, LeafIcon, MeditationIcon } from "./Icons";
+import { BondIcon, InquiryIcon, WaveIcon } from "./Icons";
 
-export const categoryIcon: Record<Category, typeof MeditationIcon> = {
-  meditation: MeditationIcon,
-  "letting-go": LeafIcon,
-  inquiry: InquiryIcon,
+export const categoryIcon: Record<Category, typeof InquiryIcon> = {
+  embodiment: InquiryIcon,
+  emotion: WaveIcon,
+  relationship: BondIcon,
 };
 
 /** 강의·전자책 표지: 그라디언트 위에 금빛 동심원 문양 */

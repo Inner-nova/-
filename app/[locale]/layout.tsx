@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
   if (!isLocale(locale)) return {};
   const d = getDictionary(locale);
   return {
-    title: { default: `${d.brand} · ${d.tagline}`, template: `%s · ${d.brand}` },
+    title: { default: `${d.wordmark} · ${d.tagline}`, template: `%s · ${d.wordmark}` },
     description: d.description,
     alternates: { languages: { ko: "/ko", en: "/en" } },
   };

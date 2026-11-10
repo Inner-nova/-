@@ -9,7 +9,7 @@ export function BookCover({ ebook, locale, className = "" }: { ebook: Ebook; loc
     <Cover hue={ebook.hue} className={`gold-frame flex flex-col justify-end rounded-r-[14px] rounded-l-[4px] p-4 ${className}`}>
       <span aria-hidden className="absolute inset-y-0 left-2 w-px bg-white/25" />
       <span className="relative font-serif text-[19px] font-semibold leading-tight text-white">{tr(ebook.title, locale)}</span>
-      <span className="relative mt-1 text-[9px] font-semibold tracking-[0.22em] text-gold-light">ARUBEN</span>
+      <span className="relative mt-1 text-[9px] font-semibold tracking-[0.22em] text-gold-light">ARUVEN</span>
     </Cover>
   );
 }

@@ -15,7 +15,7 @@ export function Header({ locale, d }: { locale: Locale; d: Dictionary }) {
     <header className="sticky top-0 z-30 border-b border-line/70 bg-ivory/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 md:px-6">
         <Link href={`/${locale}`} aria-label={d.brand}>
-          <Wordmark brand={d.brand} />
+          <Wordmark brand={d.wordmark} />
         </Link>
         <nav className="ml-8 hidden items-center gap-7 text-[14px] md:flex">
           {nav.map((n) => (

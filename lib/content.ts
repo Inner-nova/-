@@ -3,6 +3,9 @@ import type { L10n } from "./i18n";
 /*
  * 예시 콘텐츠입니다. 지금은 코드 안에 들어 있지만,
  * 회원·관리자 기능을 붙일 때 데이터베이스(Supabase)로 옮겨 관리자 화면에서 편집하게 됩니다.
+ *
+ * 아루벤의 방향: 아는 것은 많은데 삶에서 체화가 안 되는 사람들을 위한 실전 마음훈련.
+ * 모든 레슨은 "이해"보다 "오늘 실제로 해보기"로 끝납니다.
  */
 
 export type LessonType = "video" | "reading" | "practice";
@@ -13,14 +16,15 @@ export type Lesson = {
   type: LessonType;
   minutes: number;
   body: { ko: string[]; en: string[] };
+  /** 오늘의 실전 과제 */
   practice?: L10n;
-  /** true면 레슨 안에 호흡 안내 도구를 보여줍니다 */
+  /** true면 레슨 안에 호흡(멈춤) 도구를 보여줍니다 */
   breathGuide?: boolean;
 };
 
 export type Module = { title: L10n; lessons: Lesson[] };
 
-export type Category = "meditation" | "letting-go" | "inquiry";
+export type Category = "embodiment" | "emotion" | "relationship";
 
 export type Course = {
   slug: string;
@@ -35,199 +39,117 @@ export type Course = {
 };
 
 export const categories: Record<Category, L10n> = {
-  meditation: { ko: "명상", en: "Meditation" },
-  "letting-go": { ko: "비움", en: "Letting Go" },
-  inquiry: { ko: "내면 탐구", en: "Inner Inquiry" },
+  embodiment: { ko: "체화 기초", en: "Embodiment" },
+  emotion: { ko: "감정 훈련", en: "Emotional Training" },
+  relationship: { ko: "관계 실전", en: "Relationships" },
 };
 
 export const courses: Course[] = [
   {
-    slug: "breath-meditation",
-    title: { ko: "호흡 명상 입문", en: "Breath Meditation Basics" },
-    subtitle: { ko: "숨 하나로 지금 여기에 돌아오기", en: "Returning to the present, one breath at a time" },
+    slug: "knowing-to-living",
+    title: { ko: "아는 것과 사는 것 사이", en: "Between Knowing and Living" },
+    subtitle: { ko: "머리의 지식을 몸의 습관으로", en: "Turning what you know into how you live" },
     description: {
-      ko: "명상이 처음인 분을 위한 2주 과정입니다. 바른 자세, 호흡 관찰, 흩어진 마음을 다시 데려오는 방법을 하루 10분씩 익힙니다.",
-      en: "A two-week course for complete beginners. In ten minutes a day, learn posture, breath awareness, and how to gently bring a wandering mind back.",
+      ko: "책도 많이 읽고 강의도 많이 들었는데, 막상 삶에서는 그대로인 분을 위한 2주 과정입니다. 왜 지식이 변화로 이어지지 않는지 이해하고, 하루 한 번의 작은 실전으로 체화를 시작합니다.",
+      en: "A two-week course for people who have read the books and heard the talks, yet find life unchanged. Understand why knowledge doesn't become change, and begin embodying it through one small real-life practice a day.",
     },
-    category: "meditation",
+    category: "embodiment",
     level: "beginner",
     hue: 262,
     outcomes: [
-      { ko: "편안하고 안정된 명상 자세 잡기", en: "Find a comfortable, stable sitting posture" },
-      { ko: "호흡을 바꾸지 않고 바라보는 법", en: "Observe the breath without controlling it" },
-      { ko: "잡념이 올라올 때 부드럽게 돌아오는 법", en: "Return gently when thoughts arise" },
-      { ko: "일상 속 1분 명상 습관 만들기", en: "Build a one-minute daily meditation habit" },
+      { ko: "아는 것과 하는 것의 간격을 정확히 보기", en: "See the exact gap between knowing and doing" },
+      { ko: "나를 반복해서 무너뜨리는 패턴 찾기", en: "Identify the patterns that keep tripping you up" },
+      { ko: "3번의 숨으로 자동 반응 멈추기", en: "Pause automatic reactions in three breaths" },
+      { ko: "매일 1회 실전과 기록 습관 만들기", en: "Build a habit of one daily practice and a short log" },
     ],
     modules: [
       {
-        title: { ko: "1주차 · 앉는 법, 숨 쉬는 법", en: "Week 1 · How to sit, how to breathe" },
+        title: { ko: "1주차 · 왜 알아도 안 될까", en: "Week 1 · Why knowing isn't enough" },
         lessons: [
           {
-            id: "why-breath",
-            title: { ko: "왜 호흡에서 시작할까", en: "Why begin with the breath" },
-            type: "video",
-            minutes: 8,
-            body: {
-              ko: [
-                "호흡은 언제나 지금 이 순간에만 일어납니다. 어제의 숨을 쉴 수도, 내일의 숨을 미리 쉴 수도 없지요. 그래서 호흡은 마음을 '지금'으로 데려오는 가장 가까운 문입니다.",
-                "명상은 무언가를 새로 만들어내는 일이 아니라, 이미 여기 있는 것을 알아차리는 일입니다. 이 코스에서는 숨을 억지로 조절하지 않고, 있는 그대로 바라보는 연습부터 시작합니다.",
-              ],
-              en: [
-                "The breath only ever happens now. You cannot breathe yesterday's breath, nor tomorrow's. That makes it the closest doorway back to the present moment.",
-                "Meditation is not about creating something new; it's about noticing what is already here. In this course we begin by watching the breath as it is, without forcing it.",
-              ],
-            },
-            practice: {
-              ko: "오늘 하루 세 번, 하던 일을 멈추고 숨 세 번을 천천히 느껴보세요.",
-              en: "Three times today, pause what you're doing and feel three slow breaths.",
-            },
-          },
-          {
-            id: "posture",
-            title: { ko: "편안한 자세 만들기", en: "Finding a comfortable posture" },
-            type: "reading",
-            minutes: 6,
-            body: {
-              ko: [
-                "의자에 앉아도, 바닥에 앉아도 좋습니다. 중요한 것은 척추가 부드럽게 세워지고 어깨와 턱의 힘이 풀려 있는 것입니다.",
-                "손은 무릎이나 허벅지 위에 편하게 올려두고, 눈은 감거나 시선을 1~2미터 앞 바닥에 가볍게 내려놓으세요. 정답 자세는 없습니다. 10분 동안 편안히 머물 수 있는 자세가 가장 좋은 자세입니다.",
-              ],
-              en: [
-                "Sit on a chair or on the floor; either is fine. What matters is that your spine is gently upright and your shoulders and jaw are relaxed.",
-                "Rest your hands on your knees or thighs. Close your eyes, or let your gaze rest softly on the floor a few feet ahead. There is no perfect posture; the best one is the one you can rest in for ten minutes.",
-              ],
-            },
-            practice: {
-              ko: "몸을 위에서 아래로 훑으며 힘이 들어간 곳을 하나씩 풀어보세요.",
-              en: "Scan your body from head to toe and soften each place that feels tense.",
-            },
-          },
-        ],
-      },
-      {
-        title: { ko: "2주차 · 머무는 연습", en: "Week 2 · Practicing staying" },
-        lessons: [
-          {
-            id: "counting-breath",
-            title: { ko: "숨 세기 명상", en: "Counting the breath" },
-            type: "practice",
-            minutes: 10,
-            breathGuide: true,
-            body: {
-              ko: [
-                "들이쉬고 내쉬는 한 번을 '하나'로 세고, 열까지 센 뒤 다시 하나로 돌아갑니다. 중간에 숫자를 잊어도 괜찮습니다. 알아차린 순간 다시 하나부터 시작하면 됩니다.",
-                "아래 호흡 안내를 켜고 원이 커질 때 들이쉬고, 작아질 때 내쉬어 보세요.",
-              ],
-              en: [
-                "Count one full in-and-out breath as 'one', up to ten, then start again. If you lose count, that's fine. The moment you notice, simply begin again at one.",
-                "Turn on the breathing guide below: breathe in as the circle grows, out as it shrinks.",
-              ],
-            },
-            practice: {
-              ko: "아침에 일어나 5분 동안 숨 세기 명상을 해보세요.",
-              en: "Try five minutes of counting breaths after you wake up.",
-            },
-          },
-          {
-            id: "wandering-mind",
-            title: { ko: "잡념과 친구가 되기", en: "Befriending the wandering mind" },
-            type: "reading",
-            minutes: 7,
-            body: {
-              ko: [
-                "명상 중 생각이 떠오르는 것은 실패가 아닙니다. 마음은 원래 움직이는 것이고, 생각이 떠났다는 것을 알아차리는 그 순간이 바로 명상입니다.",
-                "생각에 이름을 붙여보세요. '계획', '걱정', '기억'. 그리고 구름이 지나가듯 흘려보내고 다시 숨으로 돌아옵니다.",
-              ],
-              en: [
-                "Thoughts arising during meditation is not failure. The mind naturally moves, and the very moment you notice it has wandered is meditation itself.",
-                "Try gently labeling thoughts: 'planning', 'worrying', 'remembering'. Let them pass like clouds, and return to the breath.",
-              ],
-            },
-          },
-        ],
-      },
-    ],
-  },
-  {
-    slug: "art-of-letting-go",
-    title: { ko: "비움의 기술", en: "The Art of Letting Go" },
-    subtitle: { ko: "움켜쥔 손을 펴는 연습", en: "Practicing an open hand" },
-    description: {
-      ko: "생각, 감정, 물건, 관계에서 붙잡고 있는 것을 살펴보고 가볍게 내려놓는 법을 배웁니다. 비움은 잃는 것이 아니라 자리를 내어주는 일입니다.",
-      en: "Look at what you hold onto in thoughts, emotions, things, and relationships, and learn to set it down lightly. Letting go is not losing; it is making room.",
-    },
-    category: "letting-go",
-    level: "beginner",
-    hue: 300,
-    outcomes: [
-      { ko: "내가 붙잡고 있는 것을 알아차리기", en: "Recognize what you are holding onto" },
-      { ko: "감정을 억누르지 않고 흘려보내기", en: "Release emotions without suppressing them" },
-      { ko: "일상의 작은 비움 실천", en: "Small daily practices of letting go" },
-    ],
-    modules: [
-      {
-        title: { ko: "1주차 · 붙잡음 알아차리기", en: "Week 1 · Noticing what we grasp" },
-        lessons: [
-          {
-            id: "what-we-hold",
-            title: { ko: "우리는 무엇을 쥐고 있나", en: "What are we holding?" },
+            id: "knowledge-trap",
+            title: { ko: "머리로 아는 것의 함정", en: "The trap of knowing in your head" },
             type: "video",
             minutes: 9,
             body: {
               ko: [
-                "주먹을 꽉 쥐어보세요. 그리고 천천히 펴보세요. 손바닥에 남는 감각을 느껴봅니다. 마음도 이와 같습니다. 무언가를 오래 쥐고 있으면 그 긴장이 익숙해져서 쥐고 있다는 사실조차 잊게 됩니다.",
-                "이번 레슨에서는 하루 동안 내가 어떤 생각, 감정, 기대를 붙잡고 있는지 가만히 살펴봅니다.",
+                "'화내지 말아야지', '비교하지 말아야지'. 우리는 이미 답을 알고 있습니다. 그런데 순간이 오면 몸이 먼저 반응합니다. 지식은 머리에 저장되지만, 반응은 몸에 저장되어 있기 때문입니다.",
+                "그래서 더 많이 아는 것으로는 바뀌지 않습니다. 필요한 것은 실제 상황에서 다르게 반응해 보는 경험이고, 그 경험이 반복될 때 비로소 몸이 새 길을 기억합니다. 이 코스는 그 반복을 설계하는 과정입니다.",
               ],
               en: [
-                "Make a tight fist. Now slowly open it, and feel the sensation left in your palm. The mind is like this. When we hold something long enough, the tension becomes familiar and we forget we're holding at all.",
-                "In this lesson, we quietly observe which thoughts, feelings, and expectations we hold throughout the day.",
+                "'Don't get angry.' 'Don't compare.' We already know the answers. Yet when the moment comes, the body reacts first. Knowledge is stored in the head, but reactions are stored in the body.",
+                "So knowing more doesn't change us. What changes us is the experience of responding differently in a real situation, repeated until the body remembers the new path. This course is about designing that repetition.",
               ],
             },
             practice: {
-              ko: "잠들기 전, 오늘 붙잡고 있던 것 세 가지를 적어보세요.",
-              en: "Before sleep, write down three things you held onto today.",
+              ko: "오늘 '알면서도 또 그랬다'고 느낀 순간 하나를 그대로 적어보세요. 판단 없이, 사실만.",
+              en: "Write down one moment today when you thought, 'I knew better, and did it anyway.' Facts only, no judgment.",
             },
           },
           {
-            id: "feeling-flow",
-            title: { ko: "감정이 지나가게 두기", en: "Letting feelings pass through" },
+            id: "pattern-map",
+            title: { ko: "내 패턴 지도 그리기", en: "Mapping your patterns" },
             type: "practice",
-            minutes: 10,
-            breathGuide: true,
+            minutes: 12,
             body: {
               ko: [
-                "감정이 올라오면 이야기를 붙이기 전에 몸에서 그 감정이 어디에 있는지 먼저 찾아보세요. 가슴이 조이는지, 배가 뜨거운지.",
-                "그 자리에 숨을 보내며 '이것도 지나간다'고 조용히 말해봅니다. 감정은 밀어내지 않을 때 더 빨리 흘러갑니다.",
+                "무너지는 순간에는 늘 비슷한 순서가 있습니다. 상황(무엇이 일어났나) → 몸의 신호(어디가 조여 왔나) → 생각(머릿속 문장) → 행동(실제로 한 것).",
+                "지난 일주일 중 반복된 장면 두세 개를 이 네 칸으로 나눠 적어보세요. 패턴이 보이는 순간, 그 패턴은 더 이상 완전히 자동이 아닙니다.",
               ],
               en: [
-                "When a feeling arises, before adding a story to it, find where it lives in your body. A tight chest? Warmth in the belly?",
-                "Breathe into that place and quietly say, 'This too will pass.' Feelings move through faster when we stop pushing them away.",
+                "Every time we fall apart, there's a similar sequence: situation (what happened) → body signal (where it tightened) → thought (the sentence in your head) → action (what you actually did).",
+                "Take two or three repeated scenes from the past week and break each into these four boxes. Once you can see a pattern, it is no longer fully automatic.",
               ],
+            },
+            practice: {
+              ko: "가장 자주 반복되는 패턴 하나에 이름을 붙여보세요. 예: '인정받고 싶은 버튼'.",
+              en: "Give your most frequent pattern a name, like 'the approval button'.",
             },
           },
         ],
       },
       {
-        title: { ko: "2주차 · 가벼워지는 삶", en: "Week 2 · Living lighter" },
+        title: { ko: "2주차 · 하루 한 번의 실전", en: "Week 2 · One real practice a day" },
         lessons: [
           {
-            id: "empty-space",
-            title: { ko: "빈자리의 힘", en: "The power of empty space" },
-            type: "reading",
-            minutes: 6,
+            id: "three-breath-pause",
+            title: { ko: "3번의 숨으로 멈추기", en: "The three-breath pause" },
+            type: "practice",
+            minutes: 8,
+            breathGuide: true,
             body: {
               ko: [
-                "그릇이 쓸모 있는 것은 비어 있기 때문입니다. 마음에도 빈자리가 있어야 새로운 것이 들어올 수 있습니다.",
-                "이번 주에는 책상 한 칸, 휴대폰 알림 하나, 미뤄둔 약속 하나처럼 아주 작은 것부터 비워봅니다.",
+                "자동 반응과 선택된 대응 사이에는 아주 짧은 틈이 있습니다. 훈련의 목표는 그 틈을 3번의 숨만큼 넓히는 것입니다.",
+                "아래 호흡 도구로 지금 연습해 보세요. 몸에 익혀두면, 실제 상황에서 '잠깐'이라는 신호만으로 이 리듬이 돌아옵니다.",
               ],
               en: [
-                "A bowl is useful because it is empty. The heart, too, needs empty space for something new to enter.",
-                "This week, empty something very small: one drawer, one notification, one postponed obligation.",
+                "Between an automatic reaction and a chosen response, there is a tiny gap. The goal of this drill is to widen that gap to three breaths.",
+                "Practice now with the breathing tool below. Once your body learns it, the rhythm returns in real situations with a simple cue: 'pause'.",
               ],
             },
             practice: {
-              ko: "오늘 하나를 비우고, 그 뒤 마음이 어떻게 달라졌는지 적어보세요.",
-              en: "Empty one thing today, then note how your mind feels afterward.",
+              ko: "오늘 짜증이 올라오는 순간 한 번, 말하기 전에 3번 숨 쉬기. 성공 여부보다 시도 자체를 기록하세요.",
+              en: "Once today, when irritation rises, take three breaths before speaking. Log the attempt, not the result.",
+            },
+          },
+          {
+            id: "practice-log",
+            title: { ko: "무너진 날의 복기법", en: "Reviewing the days you slip" },
+            type: "reading",
+            minutes: 7,
+            body: {
+              ko: [
+                "실전 훈련에서 실패는 데이터입니다. 무너진 날을 자책으로 끝내면 같은 자리에서 또 넘어집니다. 대신 세 가지만 물어보세요. 언제 처음 신호가 왔나? 그때 무엇을 할 수 있었나? 다음엔 무엇을 하나만 바꿀까?",
+                "이 복기가 쌓이면, 다음 순간의 틈이 조금씩 빨리 보이기 시작합니다. 체화는 완벽한 하루가 아니라 짧아지는 회복 시간으로 측정됩니다.",
+              ],
+              en: [
+                "In practical training, failure is data. If a bad day ends in self-blame, you'll trip in the same spot again. Instead, ask three questions: When did the first signal come? What could I have done then? What one thing will I change next time?",
+                "As these reviews add up, you start to see the gap sooner. Embodiment isn't measured by perfect days, but by how quickly you recover.",
+              ],
+            },
+            practice: {
+              ko: "자기 전 3분, 오늘의 한 장면을 세 질문으로 복기해 보세요.",
+              en: "Before bed, spend three minutes reviewing one scene from today with the three questions.",
             },
           },
         ],
@@ -235,75 +157,161 @@ export const courses: Course[] = [
     ],
   },
   {
-    slug: "inner-compass",
-    title: { ko: "내면의 나침반", en: "Your Inner Compass" },
-    subtitle: { ko: "나는 누구인가를 묻는 여정", en: "A journey into 'Who am I?'" },
+    slug: "when-emotions-rise",
+    title: { ko: "감정이 올라오는 순간", en: "When Emotions Rise" },
+    subtitle: { ko: "반응하는 대신 대응하는 훈련", en: "Training to respond instead of react" },
     description: {
-      ko: "명상의 기초를 익힌 분을 위한 중급 과정입니다. 자기 탐구 질문, 침묵 속 머물기, 직관을 듣는 법을 통해 삶의 방향을 안에서 찾습니다.",
-      en: "An intermediate course for those with a basic meditation practice. Through self-inquiry, resting in silence, and listening to intuition, find direction from within.",
+      ko: "분노, 불안, 서운함이 올라오는 바로 그 순간을 위한 실전 훈련입니다. 감정을 없애는 것이 아니라, 감정에 끌려가지 않고 선택할 수 있는 힘을 기릅니다.",
+      en: "Practical training for the exact moment anger, anxiety, or hurt rises. Not to get rid of emotions, but to build the capacity to choose instead of being swept away.",
     },
-    category: "inquiry",
-    level: "intermediate",
-    hue: 215,
+    category: "emotion",
+    level: "beginner",
+    hue: 300,
     outcomes: [
-      { ko: "자기 탐구 질문을 일상에서 활용하기", en: "Use self-inquiry questions in daily life" },
-      { ko: "생각과 알아차림을 구분하기", en: "Distinguish thoughts from awareness" },
-      { ko: "직관의 목소리에 귀 기울이기", en: "Listen to the voice of intuition" },
+      { ko: "감정이 올라오는 첫 신호를 몸에서 알아차리기", en: "Notice the first bodily signal of an emotion" },
+      { ko: "감정에 이름 붙여 강도를 낮추기", en: "Lower intensity by naming the emotion" },
+      { ko: "실제 갈등 상황에서 쓰는 90초 규칙", en: "A 90-second rule for real conflicts" },
     ],
     modules: [
       {
-        title: { ko: "1주차 · 묻는 법", en: "Week 1 · The art of asking" },
+        title: { ko: "1주차 · 반응과 대응 사이", en: "Week 1 · Between reaction and response" },
         lessons: [
           {
-            id: "who-am-i",
-            title: { ko: "'나는 누구인가' 묻기", en: "Asking 'Who am I?'" },
+            id: "first-signal",
+            title: { ko: "감정의 첫 신호 잡기", en: "Catching the first signal" },
             type: "video",
-            minutes: 12,
+            minutes: 10,
             body: {
               ko: [
-                "이 질문은 답을 찾기 위한 질문이 아니라, 생각 너머를 가리키는 손가락입니다. 이름, 직업, 역할을 하나씩 내려놓고 나면 무엇이 남는지 바라봅니다.",
-                "답이 떠오르면 '그것을 알고 있는 것은 누구인가?' 하고 한 번 더 물어보세요.",
+                "감정은 생각보다 몸에서 먼저 시작됩니다. 턱에 힘이 들어가고, 가슴이 답답해지고, 목소리가 빨라집니다. 이 신호를 늦게 알아차릴수록 이미 행동은 끝나 있습니다.",
+                "이번 레슨의 목표는 내 감정의 '조기 경보'를 찾는 것입니다. 사람마다 위치가 다릅니다. 내 몸이 가장 먼저 보내는 신호 하나를 정해두세요.",
               ],
               en: [
-                "This question isn't meant to produce an answer; it is a finger pointing beyond thought. Set down your name, job, and roles one by one, and see what remains.",
-                "When an answer appears, ask once more: 'Who is aware of this?'",
+                "Emotions start in the body before the mind. The jaw tightens, the chest constricts, speech speeds up. The later you notice, the more likely the action is already done.",
+                "This lesson's goal is to find your emotional early-warning signal. It's different for everyone. Choose the one signal your body sends first.",
               ],
             },
             practice: {
-              ko: "10분간 조용히 앉아 이 질문을 품고 머물러 보세요.",
-              en: "Sit quietly for ten minutes, holding this question.",
+              ko: "오늘 감정이 올라올 때마다 '지금 몸 어디?'라고만 물어보세요. 다섯 번이 목표입니다.",
+              en: "Each time an emotion rises today, just ask, 'Where in my body?' Aim for five times.",
             },
           },
           {
-            id: "silence",
-            title: { ko: "침묵 속에 머물기", en: "Resting in silence" },
+            id: "name-it",
+            title: { ko: "이름 붙이면 작아진다", en: "Name it to tame it" },
             type: "practice",
-            minutes: 15,
+            minutes: 8,
             breathGuide: true,
             body: {
               ko: [
-                "소리와 소리 사이, 생각과 생각 사이의 틈을 알아차려 봅니다. 그 틈은 비어 있지만 살아 있습니다.",
-                "호흡 안내를 따라 숨이 바뀌는 순간의 고요에 머물러 보세요.",
+                "'짜증나'보다 '무시당한 것 같아서 서운하다'처럼 정확하게 이름 붙일수록, 감정의 강도는 내려갑니다. 감정에 휩쓸린 상태에서 감정을 바라보는 상태로 한 걸음 물러나는 것입니다.",
+                "호흡 도구를 켜고, 숨을 내쉴 때마다 지금 느끼는 감정의 이름을 속으로 말해보세요.",
               ],
               en: [
-                "Notice the gap between sounds, between thoughts. That gap is empty, yet alive.",
-                "Follow the breathing guide and rest in the stillness where one breath turns into the next.",
+                "The more precisely you name a feeling, like 'hurt because I felt ignored' instead of 'annoyed', the lower its intensity. You step back from being inside the emotion to observing it.",
+                "Turn on the breathing tool, and silently name what you feel on each exhale.",
+              ],
+            },
+          },
+        ],
+      },
+      {
+        title: { ko: "2주차 · 실전 상황 연습", en: "Week 2 · Real-situation drills" },
+        lessons: [
+          {
+            id: "ninety-seconds",
+            title: { ko: "화가 날 때의 90초 규칙", en: "The 90-second rule for anger" },
+            type: "reading",
+            minutes: 6,
+            body: {
+              ko: [
+                "강한 감정의 첫 파도는 생각보다 짧습니다. 그 파도에 이야기를 계속 붙이지 않으면, 몸의 반응은 비교적 빨리 가라앉습니다. 문제는 우리가 그 사이에 말하고, 보내고, 결정한다는 것입니다.",
+                "규칙은 단순합니다. 강한 감정이 올라오면 90초 동안은 말하지도, 보내지도, 결정하지도 않는다. 그 시간 동안 몸의 감각만 지켜봅니다.",
+              ],
+              en: [
+                "The first wave of a strong emotion is shorter than we think. If we stop feeding it with stories, the body's reaction settles relatively quickly. The trouble is that we speak, send, and decide during that wave.",
+                "The rule is simple: when a strong emotion rises, for 90 seconds you don't speak, send, or decide. You only watch the sensations in your body.",
+              ],
+            },
+            practice: {
+              ko: "이번 주 한 번, 메시지를 보내기 전 90초 규칙을 적용해 보세요.",
+              en: "Once this week, apply the 90-second rule before sending a message.",
+            },
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "grounded-in-relationships",
+    title: { ko: "관계 속에서 무너지지 않기", en: "Staying Grounded in Relationships" },
+    subtitle: { ko: "혼자일 땐 되는데, 사람 앞에서 안 될 때", en: "When it works alone but fails with people" },
+    description: {
+      ko: "혼자 있을 때는 평온한데 가족, 연인, 동료 앞에서는 다시 예전으로 돌아가나요? 체화 기초를 마친 분을 위한 중급 과정으로, 가장 어려운 실전 무대인 관계 속에서 훈련합니다.",
+      en: "Calm when alone, but back to old patterns with family, partners, or coworkers? An intermediate course for those who finished the foundations, training on the hardest stage of all: relationships.",
+    },
+    category: "relationship",
+    level: "intermediate",
+    hue: 215,
+    outcomes: [
+      { ko: "관계에서 반복되는 내 역할 알아차리기", en: "Recognize the role you keep playing in relationships" },
+      { ko: "말하기 전 한 번 멈추는 대화 습관", en: "A conversational habit of pausing once before speaking" },
+      { ko: "하루의 대화를 복기하고 다시 시도하기", en: "Review the day's conversations and try again" },
+    ],
+    modules: [
+      {
+        title: { ko: "1주차 · 사람 앞에서의 훈련", en: "Week 1 · Training in front of people" },
+        lessons: [
+          {
+            id: "my-role",
+            title: { ko: "관계 속 나의 자동 역할", en: "Your automatic role in relationships" },
+            type: "video",
+            minutes: 11,
+            body: {
+              ko: [
+                "누군가 앞에서 우리는 자주 같은 역할로 돌아갑니다. 맞춰주는 사람, 해결하려는 사람, 피하는 사람, 이기려는 사람. 이 역할은 오래전 나를 지켜준 방식이었지만, 지금은 관계를 같은 자리에 묶어둡니다.",
+                "이번 주에는 상대를 바꾸려 하기 전에, 그 사람 앞에서 내가 어떤 역할로 들어가는지만 관찰합니다.",
+              ],
+              en: [
+                "Around certain people, we keep slipping into the same role: the pleaser, the fixer, the avoider, the winner. Each role once protected us, but now it keeps relationships stuck in place.",
+                "This week, before trying to change anyone, simply observe which role you step into with each person.",
+              ],
+            },
+            practice: {
+              ko: "가까운 사람 세 명을 떠올리고, 각 사람 앞에서의 내 역할을 한 단어로 적어보세요.",
+              en: "Think of three people close to you and write one word for your role with each.",
+            },
+          },
+          {
+            id: "pause-before-speaking",
+            title: { ko: "말하기 전에 한 번 멈추기", en: "One pause before speaking" },
+            type: "practice",
+            minutes: 10,
+            breathGuide: true,
+            body: {
+              ko: [
+                "대화가 뜨거워지는 순간, 한 번의 숨은 생각보다 많은 것을 바꿉니다. 말의 속도가 느려지고, 내가 정말 하고 싶은 말이 무엇인지 들리기 시작합니다.",
+                "호흡 도구로 '한 숨 멈춤'을 몸에 익혀두세요. 실제 대화에서는 상대가 눈치채지 못할 만큼 짧아도 충분합니다.",
+              ],
+              en: [
+                "When a conversation heats up, a single breath changes more than you'd expect. Your pace slows, and you start to hear what you actually want to say.",
+                "Use the breathing tool to make the one-breath pause second nature. In a real conversation, it can be so brief no one notices.",
               ],
             },
           },
           {
-            id: "intuition",
-            title: { ko: "직관의 목소리", en: "The voice of intuition" },
+            id: "conversation-review",
+            title: { ko: "오늘의 대화 복기", en: "Reviewing today's conversations" },
             type: "reading",
             minutes: 8,
             body: {
               ko: [
-                "직관은 크게 외치지 않습니다. 두려움의 목소리가 급하고 시끄럽다면, 직관은 조용하고 단순하며 몸이 편안해지는 느낌과 함께 옵니다.",
-                "중요한 결정을 앞두고 있다면 각 선택지를 떠올릴 때 몸이 어떻게 반응하는지 살펴보세요.",
+                "관계 훈련의 진짜 연습장은 대화가 끝난 뒤입니다. 아쉬웠던 대화 하나를 골라, 내가 실제로 한 말과 하고 싶었던 말을 나란히 적어보세요.",
+                "그 차이가 바로 다음 훈련 목표입니다. 내일 같은 사람과 비슷한 순간이 오면, 하고 싶었던 말의 첫 문장만이라도 시도해 봅니다.",
               ],
               en: [
-                "Intuition rarely shouts. Where fear is urgent and loud, intuition is quiet, simple, and comes with a sense of ease in the body.",
-                "Facing a decision, imagine each option and notice how your body responds.",
+                "The real practice ground for relationships is after the conversation ends. Pick one conversation you regret, and write what you actually said next to what you wished you'd said.",
+                "That difference is your next training goal. Tomorrow, when a similar moment comes with the same person, try just the first sentence of what you wanted to say.",
               ],
             },
           },
@@ -323,81 +331,79 @@ export type Ebook = {
 
 export const ebooks: Ebook[] = [
   {
-    slug: "daily-stillness",
-    title: { ko: "매일의 고요", en: "Daily Stillness" },
-    subtitle: { ko: "바쁜 하루 속 1분 명상 안내서", en: "A guide to one-minute meditations in busy days" },
+    slug: "i-know-but",
+    title: { ko: "아는데 왜 안 될까", en: "I Know, So Why Can't I?" },
+    subtitle: { ko: "지식이 체화로 넘어가는 다리", en: "The bridge from knowledge to embodiment" },
     hue: 245,
     chapters: [
       {
-        title: { ko: "고요는 멀리 있지 않다", en: "Stillness is not far away" },
+        title: { ko: "지식은 지도일 뿐", en: "Knowledge is only a map" },
         body: {
           ko: [
-            "우리는 고요를 찾기 위해 산이나 절, 긴 휴가를 떠올립니다. 하지만 고요는 장소가 아니라 주의의 방향입니다.",
-            "엘리베이터를 기다리는 30초, 커피가 내려지는 1분. 하루에는 이미 수많은 작은 빈틈이 있습니다. 이 책은 그 틈을 고요로 바꾸는 방법을 이야기합니다.",
+            "우리는 마음에 관한 좋은 문장을 수없이 알고 있습니다. 하지만 지도를 많이 모은다고 산을 오른 것은 아닙니다. 지식은 방향을 알려줄 뿐, 걸음은 대신 걸어주지 않습니다.",
+            "이 책은 지도를 더 주지 않습니다. 대신 이미 가진 지도를 들고, 오늘 한 걸음을 어떻게 내딛을지 이야기합니다.",
           ],
           en: [
-            "We imagine stillness requires mountains, temples, or long vacations. But stillness is not a place; it is a direction of attention.",
-            "Thirty seconds waiting for an elevator, one minute while coffee brews. Our days are already full of small gaps. This book is about turning those gaps into stillness.",
+            "We know countless good sentences about the mind. But collecting maps is not the same as climbing the mountain. Knowledge points the way; it doesn't walk for you.",
+            "This book won't give you more maps. It's about taking the maps you already have and deciding how to take one step today.",
           ],
         },
       },
       {
-        title: { ko: "1분 명상 세 가지", en: "Three one-minute meditations" },
+        title: { ko: "체화는 반복으로 온다", en: "Embodiment comes through repetition" },
         body: {
           ko: [
-            "첫째, 발바닥 명상: 서 있는 곳에서 발바닥이 땅에 닿는 감각을 느낍니다.",
-            "둘째, 소리 명상: 눈을 감고 가장 먼 소리부터 가장 가까운 소리까지 차례로 듣습니다.",
-            "셋째, 세 번의 숨: 들이쉬며 '여기', 내쉬며 '지금'이라고 마음속으로 말합니다.",
+            "한 번의 깨달음은 강렬하지만 금방 흐려집니다. 몸이 기억하는 것은 강도가 아니라 횟수입니다. 작고 쉬운 연습을 매일 하는 사람이, 가끔 큰 결심을 하는 사람보다 멀리 갑니다.",
+            "그래서 훈련은 작아야 합니다. 너무 쉬워서 빠뜨리기 어려울 만큼.",
           ],
           en: [
-            "First, the soles of the feet: wherever you stand, feel your feet touching the ground.",
-            "Second, listening: close your eyes and hear sounds from the farthest to the nearest.",
-            "Third, three breaths: inhale saying 'here', exhale saying 'now', silently.",
+            "A single insight is vivid but fades fast. The body remembers frequency, not intensity. Someone who does a small, easy practice daily goes further than someone who makes big resolutions now and then.",
+            "So training has to be small. So easy it's hard to skip.",
           ],
         },
       },
       {
-        title: { ko: "습관으로 만들기", en: "Making it a habit" },
+        title: { ko: "작게 시작하기", en: "Start small" },
         body: {
           ko: [
-            "새 습관은 이미 있는 습관에 붙일 때 오래갑니다. 양치 후, 컴퓨터를 켠 직후, 현관문을 열기 전처럼 매일 하는 행동 뒤에 1분 명상을 붙여보세요.",
+            "오늘 할 일은 하나입니다. 하루 중 이미 반복되는 행동(문 열기, 메시지 보내기, 커피 마시기) 하나를 정하고, 그 직전에 숨 한 번을 붙이세요.",
           ],
           en: [
-            "New habits last when attached to existing ones. Try adding a one-minute meditation right after brushing your teeth, turning on your computer, or before opening your front door.",
+            "Today there's only one task. Choose an action you already repeat daily (opening a door, sending a message, making coffee) and attach one breath right before it.",
           ],
         },
       },
     ],
   },
   {
-    slug: "notes-on-emptiness",
-    title: { ko: "비움 노트", en: "Notes on Emptiness" },
-    subtitle: { ko: "내려놓을수록 채워지는 이야기", en: "Stories of being filled by letting go" },
+    slug: "field-notes",
+    title: { ko: "실전 마음훈련 노트", en: "Mind Training Field Notes" },
+    subtitle: { ko: "매일 쓰는 체크인과 복기 양식", en: "Daily check-in and review templates" },
     hue: 320,
     chapters: [
       {
-        title: { ko: "가득 찬 찻잔", en: "The full teacup" },
+        title: { ko: "하루 3번 체크인", en: "Three check-ins a day" },
         body: {
           ko: [
-            "이미 가득 찬 찻잔에는 차를 더 부을 수 없습니다. 배우고 싶다면 먼저 내가 안다고 믿는 것을 조금 비워야 합니다.",
-            "비움은 모른다는 것을 허락하는 용기입니다.",
+            "아침, 점심, 저녁에 각각 30초씩 멈추고 세 가지를 확인합니다. 지금 몸은 어떤가? 지금 마음은 어떤가? 지금 나는 무엇을 선택하고 있나?",
+            "답을 잘 쓰는 것이 목적이 아닙니다. 하루 중 세 번, 자동 모드에서 빠져나오는 것 자체가 훈련입니다.",
           ],
           en: [
-            "You cannot pour more tea into a cup that is already full. To learn, we must first empty a little of what we believe we know.",
-            "Emptiness is the courage to allow not-knowing.",
+            "Morning, midday, and evening, pause for 30 seconds and check three things: How is my body? How is my mind? What am I choosing right now?",
+            "The goal isn't good answers. Stepping out of autopilot three times a day is the training itself.",
           ],
         },
       },
       {
-        title: { ko: "내려놓기 연습 노트", en: "A practice journal for letting go" },
+        title: { ko: "무너진 날의 복기 양식", en: "A review template for hard days" },
         body: {
           ko: [
-            "매일 저녁 세 줄을 적어보세요. 오늘 붙잡았던 것, 그것을 붙잡은 이유, 내일 조금 내려놓을 수 있는 방법.",
-            "몇 주가 지나면 반복되는 패턴이 보이기 시작합니다. 패턴을 보는 것만으로도 그 힘은 약해집니다.",
+            "1. 장면: 무슨 일이 있었나 (한 줄)  2. 첫 신호: 몸에서 처음 느낀 것  3. 그때의 선택지: 할 수 있었던 다른 행동  4. 다음 실험: 다음엔 무엇 하나를 바꿔볼까",
+            "몇 주가 지나면 같은 장면이 반복되는 것이 보입니다. 패턴이 보이면, 이미 절반은 바뀐 것입니다.",
           ],
           en: [
-            "Each evening, write three lines: what you held onto today, why you held it, and how you might loosen your grip tomorrow.",
-            "After a few weeks, patterns begin to appear. Simply seeing a pattern weakens its hold.",
+            "1. Scene: what happened (one line)  2. First signal: what you first felt in your body  3. Options: what else you could have done  4. Next experiment: one thing to change next time",
+            "After a few weeks, you'll see the same scenes repeating. Once you see the pattern, you're already halfway to changing it.",
           ],
         },
       },
