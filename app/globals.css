@@ -2,14 +2,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #1b1d23;
-  --color-muted: #5f6573;
-  --color-line: #dfe2e8;
-  --color-surface: #f4f6fa;
-  --color-primary: #2f4bd8;
-  --color-primary-dark: #2239b0;
-  --color-primary-soft: #e9eeff;
-  --color-gold: #b9853f;
+  --color-ink: #211c33;
+  --color-muted: #6c6683;
+  --color-line: #e7e2f3;
+  --color-surface: #f8f5ff;
+  --color-primary: #7b5ce0;
+  --color-primary-dark: #6443c9;
+  --color-primary-soft: #f0eaff;
+  --color-gold: #c9a24f;
   --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
 }
 
@@ -18,7 +18,11 @@ html {
 }
 
 body {
-  background: #fff;
+  background:
+    radial-gradient(60rem 28rem at 85% -8rem, rgba(186, 160, 255, 0.22), transparent 70%),
+    radial-gradient(40rem 22rem at -10% 10rem, rgba(240, 190, 255, 0.14), transparent 70%),
+    #fdfcff;
+  background-repeat: no-repeat;
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
@@ -27,6 +31,18 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+}
+
+/* 신비로운 연보라 배너: 은은한 그라디언트 + 별빛 */
+.mystic {
+  background:
+    radial-gradient(circle at 12% 30%, rgba(255, 255, 255, 0.9) 0 1px, transparent 2px),
+    radial-gradient(circle at 78% 18%, rgba(255, 255, 255, 0.9) 0 1.2px, transparent 2.5px),
+    radial-gradient(circle at 62% 78%, rgba(255, 255, 255, 0.8) 0 1px, transparent 2px),
+    radial-gradient(circle at 92% 64%, rgba(255, 255, 255, 0.7) 0 0.8px, transparent 2px),
+    radial-gradient(circle at 35% 88%, rgba(255, 255, 255, 0.7) 0 0.8px, transparent 2px),
+    radial-gradient(120% 140% at 100% 0%, #f6d9ff 0%, transparent 55%),
+    linear-gradient(120deg, #efe7ff 0%, #e4dbff 45%, #f3e3ff 100%);
 }
 
 /* 가로 스크롤 목록: 스크롤바 숨김 */

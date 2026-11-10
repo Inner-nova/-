@@ -22,7 +22,7 @@ export function BottomNav({ locale, d }: { locale: Locale; d: Dictionary }) {
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
       aria-label="Main"
     >
-      <ul className="flex items-stretch justify-between rounded-[28px] border border-white/70 bg-white/80 p-1.5 shadow-[0_8px_30px_rgba(20,30,60,0.15)] backdrop-blur-xl">
+      <ul className="flex items-stretch justify-between rounded-[28px] border border-white/70 bg-white/80 p-1.5 shadow-[0_8px_30px_rgba(90,60,170,0.18)] backdrop-blur-xl">
         {tabs.map(({ href, label, Icon, exact }) => {
           const active = exact ? pathname === href : pathname.startsWith(href);
           return (

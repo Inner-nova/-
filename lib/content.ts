@@ -51,7 +51,7 @@ export const courses: Course[] = [
     },
     category: "meditation",
     level: "beginner",
-    hue: 250,
+    hue: 262,
     outcomes: [
       { ko: "편안하고 안정된 명상 자세 잡기", en: "Find a comfortable, stable sitting posture" },
       { ko: "호흡을 바꾸지 않고 바라보는 법", en: "Observe the breath without controlling it" },
@@ -158,7 +158,7 @@ export const courses: Course[] = [
     },
     category: "letting-go",
     level: "beginner",
-    hue: 35,
+    hue: 300,
     outcomes: [
       { ko: "내가 붙잡고 있는 것을 알아차리기", en: "Recognize what you are holding onto" },
       { ko: "감정을 억누르지 않고 흘려보내기", en: "Release emotions without suppressing them" },
@@ -244,7 +244,7 @@ export const courses: Course[] = [
     },
     category: "inquiry",
     level: "intermediate",
-    hue: 160,
+    hue: 215,
     outcomes: [
       { ko: "자기 탐구 질문을 일상에서 활용하기", en: "Use self-inquiry questions in daily life" },
       { ko: "생각과 알아차림을 구분하기", en: "Distinguish thoughts from awareness" },
@@ -326,7 +326,7 @@ export const ebooks: Ebook[] = [
     slug: "daily-stillness",
     title: { ko: "매일의 고요", en: "Daily Stillness" },
     subtitle: { ko: "바쁜 하루 속 1분 명상 안내서", en: "A guide to one-minute meditations in busy days" },
-    hue: 220,
+    hue: 245,
     chapters: [
       {
         title: { ko: "고요는 멀리 있지 않다", en: "Stillness is not far away" },
@@ -373,7 +373,7 @@ export const ebooks: Ebook[] = [
     slug: "notes-on-emptiness",
     title: { ko: "비움 노트", en: "Notes on Emptiness" },
     subtitle: { ko: "내려놓을수록 채워지는 이야기", en: "Stories of being filled by letting go" },
-    hue: 30,
+    hue: 320,
     chapters: [
       {
         title: { ko: "가득 찬 찻잔", en: "The full teacup" },

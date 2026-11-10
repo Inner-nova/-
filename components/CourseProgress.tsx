@@ -118,7 +118,7 @@ export function ModuleCard({
   const href = `${basePath}/learn/${nextLesson(lessonIds, done, entry?.last)}`;
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_1px_3px_rgba(20,30,60,0.06)]">
+    <div className="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_1px_3px_rgba(90,60,170,0.07)]">
       <div className="flex items-center gap-4 px-5 py-5">
         {complete && (
           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-white">

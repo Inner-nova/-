@@ -32,7 +32,7 @@ export default async function Explore({ params }: PageProps<"/[locale]">) {
               <Link
                 key={key}
                 href={`/${locale}/courses?category=${key}`}
-                className="flex shrink-0 items-center gap-2.5 rounded-xl border border-line px-5 py-3.5 text-[16px] font-semibold transition hover:border-primary hover:text-primary"
+                className="flex shrink-0 items-center gap-2.5 rounded-xl border border-line bg-white/70 px-5 py-3.5 text-[16px] font-semibold transition hover:border-primary hover:text-primary"
               >
                 <Icon size={24} />
                 {tr(categories[key], locale)}
@@ -43,11 +43,11 @@ export default async function Explore({ params }: PageProps<"/[locale]">) {
       </section>
 
       {/* 배너 */}
-      <div className="mx-4 mt-8 flex flex-col gap-4 rounded-2xl border border-primary/30 bg-primary-soft px-5 py-5 sm:flex-row sm:items-center sm:justify-between md:mx-0 md:px-8 md:py-6">
+      <div className="mx-4 mt-8 flex flex-col gap-4 mystic rounded-2xl border border-primary/25 px-5 py-5 shadow-[0_6px_24px_rgba(123,92,224,0.12)] sm:flex-row sm:items-center sm:justify-between md:mx-0 md:px-8 md:py-6">
         <div>
           <p className="text-2xl font-extrabold tracking-tight text-primary">
             {d.home.bannerBrand.split(" ")[0]}{" "}
-            <span className="ml-0.5 rounded bg-primary px-1.5 py-0.5 align-middle text-sm font-bold text-white">
+            <span className="ml-0.5 rounded bg-gradient-to-r from-primary to-[#b46fe0] px-1.5 py-0.5 align-middle text-sm font-bold text-white">
               {d.home.bannerBrand.split(" ")[1]}
             </span>
           </p>

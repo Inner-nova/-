@@ -12,7 +12,7 @@ export function Header({ locale, d }: { locale: Locale; d: Dictionary }) {
     { href: `/${locale}/my`, label: d.nav.my },
   ];
   return (
-    <header className="sticky top-0 z-30 border-b border-line bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-30 border-b border-line bg-white/75 backdrop-blur-md">
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-3 px-4 md:h-16 md:px-6">
         <Link href={`/${locale}`} className="flex items-center gap-2 text-lg font-bold tracking-tight">
           <Logo />
