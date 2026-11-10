@@ -32,6 +32,13 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  async redirects() {
+    // 예전 학습·서재 주소는 통합된 훈련 페이지로
+    return [
+      { source: "/:locale(ko|en)/my", destination: "/:locale/courses", permanent: false },
+      { source: "/:locale(ko|en)/library", destination: "/:locale/courses?category=ebook", permanent: false },
+    ];
+  },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

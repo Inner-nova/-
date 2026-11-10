@@ -10,11 +10,10 @@
 | 기능 | 경로 |
 |---|---|
 | 메인 페이지 | `/ko`, `/en` |
-| 강의 둘러보기 (카테고리 필터) | `/ko/courses` |
+| 훈련 (이어하기 + 강의 + 전자책 통합, 주제/전자책 필터) | `/ko/courses` |
 | 코스 소개 (커리큘럼, 배울 내용, 진도율) | `/ko/courses/knowing-to-living` |
 | 레슨 학습 화면 (레슨 목록, 완료 표시, 이전/다음, 멈춤(호흡) 훈련 도구) | `/ko/courses/knowing-to-living/learn/knowledge-trap` |
-| 무료 전자책 서재 / 바로 읽기 | `/ko/library`, `/ko/library/i-know-but` |
-| 내 학습 (진도율, 이어보기) | `/ko/my` |
+| 전자책 읽기 | `/ko/library/i-know-but` |
 | 한국어 / 영어 | 오른쪽 위 언어 버튼. 처음 방문 시 브라우저 언어에 맞춰 자동 이동 |
 
 - 진도는 지금 **브라우저에만** 저장됩니다. 회원 기능을 붙이면 계정에 저장되도록 `lib/progress.ts`만 바꾸면 됩니다.

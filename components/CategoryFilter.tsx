@@ -29,7 +29,7 @@ export function CategoryFilter({ allLabel, categories, gridClass, children }: Pr
 
   return (
     <>
-      <div className="no-scrollbar -mx-4 mb-10 mt-6 flex justify-start gap-6 overflow-x-auto border-b border-line px-4 sm:justify-center md:mx-0 md:px-0" role="group">
+      <div className="no-scrollbar -mx-4 mb-10 flex justify-start gap-6 overflow-x-auto border-b border-line px-4 sm:justify-center md:mx-0 md:px-0" role="group">
         {options.map((o) => (
           <button
             key={o.key}

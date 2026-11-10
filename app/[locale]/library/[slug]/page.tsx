@@ -25,8 +25,8 @@ export default async function EbookPage({ params }: PageProps<"/[locale]/library
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-10 md:px-6">
-      <Link href={`/${locale}/library`} className="inline-flex items-center gap-1 text-[13px] text-muted hover:text-ink">
-        <ChevronIcon dir="left" size={14} /> {d.library.back}
+      <Link href={`/${locale}/courses?category=ebook`} className="inline-flex items-center gap-1 text-[13px] text-muted hover:text-ink">
+        <ChevronIcon dir="left" size={14} /> {d.nav.courses}
       </Link>
 
       <header className="mt-10 flex flex-col items-center text-center">

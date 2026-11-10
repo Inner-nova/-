@@ -8,8 +8,6 @@ export function Header({ locale, d }: { locale: Locale; d: Dictionary }) {
   const nav = [
     { href: `/${locale}`, label: d.nav.explore },
     { href: `/${locale}/courses`, label: d.nav.courses },
-    { href: `/${locale}/library`, label: d.nav.library },
-    { href: `/${locale}/my`, label: d.nav.my },
   ];
   return (
     <header className="sticky top-0 z-30 border-b border-line/70 bg-ivory/80 backdrop-blur-md">

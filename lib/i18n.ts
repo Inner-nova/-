@@ -25,7 +25,7 @@ const dictionaries = {
     tagline: "아는 것을, 사는 것으로",
     description:
       "아루벤은 아는 것은 많지만 삶에서 체화가 안 되는 사람들을 위한 실전 마음훈련입니다. 매일의 짧은 훈련과 실제 상황 과제로 아는 것을 몸에 익힙니다.",
-    nav: { explore: "탐색", courses: "강의", my: "학습", library: "서재", search: "검색" },
+    nav: { explore: "탐색", courses: "훈련", my: "학습", library: "서재", search: "검색" },
     common: { viewAll: "모두 보기", provider: "아루벤", course: "코스", ebook: "전자책", free: "무료" },
     home: {
       heroEyebrow: "ARUVEN · PRACTICAL MIND TRAINING",
@@ -59,7 +59,8 @@ const dictionaries = {
       instructorBody: "아루벤 트레이너 · 아는 것을 함께 연습하는 동반자",
       progress: "진도",
       allCategories: "전체",
-      catalogTitle: "강의",
+      catalogTitle: "훈련",
+      inProgress: "이어하기",
       catalogBody: "이해에서 멈추지 않고, 실제 상황에서 해보는 훈련 코스들입니다.",
     },
     lesson: {
@@ -120,7 +121,7 @@ const dictionaries = {
     tagline: "From knowing, to living",
     description:
       "Aruven is practical mind training for people who know a lot but haven't yet lived it. Short daily drills and real-life assignments turn what you know into how you live.",
-    nav: { explore: "Explore", courses: "Courses", my: "Learning", library: "Library", search: "Search" },
+    nav: { explore: "Explore", courses: "Training", my: "Learning", library: "Library", search: "Search" },
     common: { viewAll: "View all", provider: "Aruven", course: "Course", ebook: "Ebook", free: "Free" },
     home: {
       heroEyebrow: "ARUVEN · PRACTICAL MIND TRAINING",
@@ -154,7 +155,8 @@ const dictionaries = {
       instructorBody: "Aruven Trainer · a partner who practices with you",
       progress: "Progress",
       allCategories: "All",
-      catalogTitle: "Courses",
+      catalogTitle: "Training",
+      inProgress: "Continue",
       catalogBody: "Training courses that go beyond understanding into real-life practice.",
     },
     lesson: {

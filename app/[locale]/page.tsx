@@ -41,7 +41,7 @@ export default async function Explore({ params }: PageProps<"/[locale]">) {
           <Link href={`/${locale}/courses/${first.slug}`} className="btn-primary">
             {d.home.ctaStart}
           </Link>
-          <Link href={`/${locale}/library`} className="btn-ghost-dark">
+          <Link href={`/${locale}/courses?category=ebook`} className="btn-ghost-dark">
             {d.home.ctaLibrary}
           </Link>
         </div>
