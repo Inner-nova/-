@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { ebookMinutes, type Ebook } from "@/lib/content";
-import { fill, tr, type Dictionary, type Locale } from "@/lib/i18n";
+import type { Ebook } from "@/lib/content";
+import { tr, type Dictionary, type Locale } from "@/lib/i18n";
 import { InviteCover, seedOf } from "./Stardust";
 
 /** 책 표지: 초대장 모양 + 왼쪽 책등 선 */
@@ -19,7 +19,7 @@ export function BookCover({ ebook, locale, className = "", small = false }: { eb
   );
 }
 
-export function EbookCard({ ebook, locale, d }: { ebook: Ebook; locale: Locale; d: Dictionary }) {
+export function EbookCard({ ebook, locale }: { ebook: Ebook; locale: Locale; d?: Dictionary }) {
   return (
     <Link href={`/${locale}/library/${ebook.slug}`} className="group block">
       <BookCover
@@ -27,11 +27,6 @@ export function EbookCard({ ebook, locale, d }: { ebook: Ebook; locale: Locale; 
         locale={locale}
         className="aspect-[4/5] shadow-[0_18px_34px_-18px_rgba(0,0,0,0.75)] transition duration-500 group-hover:-translate-y-1"
       />
-      <p className="mt-3 text-center text-[12.5px] tracking-wide text-muted">
-        {d.common.ebook}
-        <span className="mx-1.5 text-gold">·</span>
-        {fill(d.library.readTime, { n: ebookMinutes(ebook) })}
-      </p>
     </Link>
   );
 }

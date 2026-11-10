@@ -62,18 +62,6 @@ export default async function CoursePage({ params }: PageProps<"/[locale]/course
             basePath={base}
             labels={{ start: d.course.start, continue: d.course.continue, progress: d.course.progress }}
           />
-          <p className="text-[12.5px] tracking-wide text-muted">
-            {course.modules.length}
-            {locale === "ko" ? "" : " "}
-            {d.course.weeks}
-            <span className="mx-1.5 text-gold">·</span>
-            {lessons.length} {d.course.lessons}
-            <span className="mx-1.5 text-gold">·</span>
-            {totalMinutes(course)}
-            {d.course.minutes}
-            <span className="mx-1.5 text-gold">·</span>
-            {d.common.free}
-          </p>
         </div>
       </section>
 

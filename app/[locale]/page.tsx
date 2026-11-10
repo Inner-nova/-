@@ -32,11 +32,9 @@ export default async function Explore({ params }: PageProps<"/[locale]">) {
             <Stardust seed={2026} density={2.2} w={200} h={100} />
           </div>
           <div className="absolute inset-0 flex flex-col items-center justify-center pb-[5%] text-center">
-            <p className="font-serif text-[15px] italic text-gold/90 md:text-[17px]">Practical Mind Training</p>
-            <h1 className="mt-2 font-serif text-[58px] font-medium italic leading-none tracking-tight text-gold-light md:text-[84px]">
+            <h1 className="font-serif text-[58px] font-medium italic leading-none tracking-tight text-gold-light md:text-[84px]">
               Aruven
             </h1>
-            <p className="mt-5 font-serif text-[16px] font-medium tracking-wide text-ink/85 md:text-[19px]">{d.tagline}</p>
           </div>
         </div>
         <div className="mt-8 flex justify-center gap-3">

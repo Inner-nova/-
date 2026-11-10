@@ -6,8 +6,7 @@ export function Footer({ d }: { d: Dictionary }) {
     <footer className="mt-28 border-t border-line/70">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4 py-12 text-center md:px-6">
         <Wordmark brand={d.wordmark} light />
-        <p className="font-serif text-[15px] italic text-gold/80">{d.tagline}</p>
-        <p className="mt-3 text-[11px] tracking-[0.18em] text-muted/70">© {new Date().getFullYear()} ARUVEN</p>
+        <p className="mt-1 text-[11px] tracking-[0.18em] text-muted/70">© {new Date().getFullYear()} ARUVEN</p>
       </div>
     </footer>
   );
