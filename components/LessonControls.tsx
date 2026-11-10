@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { useProgress } from "@/lib/progress";
+import { CheckIcon } from "./Icons";
 
 export { LessonCheck } from "./CourseProgress";
 
@@ -22,17 +23,16 @@ export function LessonCompleteBar({
   }, [courseSlug, lessonId, visit]);
 
   return (
-    <div className="mt-10 flex justify-center">
-      <button
-        type="button"
-        onClick={() => setComplete(courseSlug, lessonId, !done)}
-        aria-pressed={done}
-        className={`flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold transition ${
-          done ? "bg-sage text-white hover:bg-sage/85" : "bg-ink text-white hover:bg-ink/85"
-        }`}
-      >
-        {done ? "✓ " + labels.done : labels.mark}
-      </button>
-    </div>
+    <button
+      type="button"
+      onClick={() => setComplete(courseSlug, lessonId, !done)}
+      aria-pressed={done}
+      className={`mt-10 flex w-full items-center justify-center gap-2 rounded-xl py-3.5 text-[16px] font-bold transition ${
+        done ? "border-2 border-primary/40 bg-primary-soft text-primary" : "bg-primary text-white hover:bg-primary-dark"
+      }`}
+    >
+      {done && <CheckIcon size={18} strokeWidth={3} />}
+      {done ? labels.done : labels.mark}
+    </button>
   );
 }

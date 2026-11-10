@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { courses, flatLessons } from "@/lib/content";
+import { courses } from "@/lib/content";
 import { getDictionary, isLocale, tr } from "@/lib/i18n";
 import { MyLearning } from "@/components/MyLearning";
 
@@ -16,25 +16,16 @@ export default async function MyPage({ params }: PageProps<"/[locale]/my">) {
   const summary = courses.map((c) => ({
     slug: c.slug,
     title: tr(c.title, locale),
-    hue: c.hue,
-    lessons: flatLessons(c).map((l) => ({ id: l.id, title: tr(l.title, locale) })),
+    modules: c.modules.map((m) => ({ title: tr(m.title, locale), lessonIds: m.lessons.map((l) => l.id) })),
   }));
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6">
-      <h1 className="font-serif text-3xl font-semibold">{d.my.title}</h1>
-      <p className="mt-3 rounded-xl border border-line bg-paper px-4 py-3 text-sm text-ink-soft">{d.my.note}</p>
+    <div className="mx-auto max-w-3xl px-4 pt-6 md:px-6 md:pt-12">
+      <h1 className="text-center text-2xl font-bold md:text-left md:text-4xl">{d.my.title}</h1>
       <MyLearning
         locale={locale}
         courses={summary}
-        labels={{
-          empty: d.my.empty,
-          browse: d.my.browse,
-          reset: d.my.reset,
-          done: d.my.done,
-          continue: d.course.continue,
-          lessons: d.course.lessons,
-        }}
+        labels={{ ...d.my, provider: d.common.provider, course: d.common.course }}
       />
     </div>
   );

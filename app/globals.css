@@ -1,16 +1,16 @@
+@import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #1d1a33;
-  --color-ink-soft: #4a4663;
-  --color-sand: #f7f3ec;
-  --color-paper: #fffdf9;
-  --color-line: #e7e0d3;
+  --color-ink: #1b1d23;
+  --color-muted: #5f6573;
+  --color-line: #dfe2e8;
+  --color-surface: #f4f6fa;
+  --color-primary: #2f4bd8;
+  --color-primary-dark: #2239b0;
+  --color-primary-soft: #e9eeff;
   --color-gold: #b9853f;
-  --color-gold-soft: #f3e6d1;
-  --color-sage: #6f8f7a;
-  --font-sans: "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-serif: "Nanum Myeongjo", "Noto Serif KR", Georgia, "Times New Roman", serif;
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
 }
 
 html {
@@ -18,15 +18,23 @@ html {
 }
 
 body {
-  background: var(--color-sand);
+  background: #fff;
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-gold);
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+}
+
+/* 가로 스크롤 목록: 스크롤바 숨김 */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 .cover {
@@ -34,12 +42,6 @@ body {
     radial-gradient(120% 90% at 20% 10%, hsl(var(--hue) 60% 85%) 0%, transparent 60%),
     radial-gradient(90% 80% at 90% 90%, hsl(calc(var(--hue) + 40) 45% 70%) 0%, transparent 65%),
     hsl(var(--hue) 35% 30%);
-}
-
-@keyframes breathe {
-  0%, 100% { transform: scale(0.55); }
-  40% { transform: scale(1); }
-  55% { transform: scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { categories, courses, type Category } from "@/lib/content";
 import { getDictionary, isLocale, tr } from "@/lib/i18n";
@@ -15,18 +16,32 @@ export default async function CoursesPage({ params }: PageProps<"/[locale]/cours
   if (!isLocale(locale)) notFound();
   const d = getDictionary(locale);
   const cats = (Object.keys(categories) as Category[]).map((key) => ({ key, label: tr(categories[key], locale) }));
+  const cards = courses.map((c) => ({
+    category: c.category,
+    node: <CourseCard key={c.slug} course={c} locale={locale} d={d} />,
+  }));
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-      <h1 className="font-serif text-3xl font-semibold">{d.course.catalogTitle}</h1>
-      <p className="mt-2 text-ink-soft">{d.course.catalogBody}</p>
-      <CategoryFilter allLabel={d.course.allCategories} categories={cats}>
-        {courses.map((c) => (
-          <div key={c.slug} data-category={c.category} className="flex">
-            <CourseCard course={c} locale={locale} d={d} />
+    <div className="mx-auto max-w-6xl px-4 pt-8 md:px-6 md:pt-12">
+      <h1 className="text-4xl font-bold tracking-tight">{d.course.catalogTitle}</h1>
+      <p className="mt-2 text-muted">{d.course.catalogBody}</p>
+      <Suspense
+        fallback={
+          <div className="mt-[88px] grid grid-cols-2 gap-x-4 gap-y-8 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
+            {cards.map(({ node }) => (
+              <div key={node.key}>{node}</div>
+            ))}
           </div>
-        ))}
-      </CategoryFilter>
+        }
+      >
+        <CategoryFilter allLabel={d.course.allCategories} categories={cats}>
+          {cards.map(({ category, node }) => (
+            <div key={node.key} data-category={category}>
+              {node}
+            </div>
+          ))}
+        </CategoryFilter>
+      </Suspense>
     </div>
   );
 }

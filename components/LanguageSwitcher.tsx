@@ -12,7 +12,7 @@ export function LanguageSwitcher({ locale }: { locale: Locale }) {
     <Link
       href={href}
       hrefLang={other}
-      className="ml-0.5 whitespace-nowrap rounded-full border border-line px-2 sm:ml-1 sm:px-2.5 py-1 text-xs font-medium text-ink-soft transition hover:border-gold hover:text-ink"
+      className="whitespace-nowrap rounded-full border border-line px-3 py-1.5 text-xs font-semibold text-muted transition hover:border-primary hover:text-primary"
       aria-label={other === "en" ? "Switch to English" : "한국어로 보기"}
     >
       {other === "en" ? "EN" : "한국어"}

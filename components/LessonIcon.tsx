@@ -1,7 +1,7 @@
 import type { LessonType } from "@/lib/content";
 
 export function LessonIcon({ type }: { type: LessonType }) {
-  const common = { width: 14, height: 14, viewBox: "0 0 16 16", fill: "none", stroke: "currentColor", strokeWidth: 1.5, "aria-hidden": true };
+  const common = { width: 16, height: 16, viewBox: "0 0 16 16", fill: "none", stroke: "currentColor", strokeWidth: 1.5, "aria-hidden": true };
   if (type === "video")
     return (
       <svg {...common}>
