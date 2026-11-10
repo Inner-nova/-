@@ -5,7 +5,8 @@ import { categories, courses, flatLessons, getCourse, totalMinutes } from "@/lib
 import { getDictionary, isLocale, locales, tr } from "@/lib/i18n";
 import { CourseActions, LessonCheck, ModuleCard } from "@/components/CourseProgress";
 import { LessonIcon } from "@/components/LessonIcon";
-import { Cover } from "@/components/Cover";
+import { Stardust, seedOf } from "@/components/Stardust";
+import { SectionHead } from "@/components/Shelf";
 import { ChevronIcon } from "@/components/Icons";
 
 export function generateStaticParams() {
@@ -27,104 +28,87 @@ export default async function CoursePage({ params }: PageProps<"/[locale]/course
   const lessons = flatLessons(course);
   const base = `/${locale}/courses/${course.slug}`;
 
-  const facts = [
-    { k: `${course.modules.length}${locale === "ko" ? "" : " "}${d.course.weeks}`, v: d.course.level[course.level] },
-    { k: `${lessons.length} ${d.course.lessons}`, v: `${totalMinutes(course)}${d.course.minutes}` },
-    { k: d.common.free, v: tr(categories[course.category], locale) },
-  ];
-
   return (
     <>
       <section className="px-4 pt-5 md:px-6 md:pt-8">
-        <div className="night relative mx-auto max-w-6xl overflow-hidden rounded-[28px]">
-          <div className="grid gap-10 px-6 py-10 md:grid-cols-[1fr_17rem] md:px-12 md:py-14">
-            <div>
-              <Link href={`/${locale}/courses`} className="inline-flex items-center gap-1 text-[13px] text-white/50 hover:text-white/80">
-                <ChevronIcon dir="left" size={14} /> {d.nav.courses}
-              </Link>
-              <p className="label-gold mt-6 !text-gold-light">
+        <div className="relative mx-auto max-w-6xl">
+          <Link
+            href={`/${locale}/courses`}
+            className="absolute left-4 top-4 z-10 inline-flex items-center gap-1 text-[13px] text-ink/60 hover:text-ink"
+          >
+            <ChevronIcon dir="left" size={14} /> {d.nav.courses}
+          </Link>
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[6px] bg-deep gold-frame sm:aspect-[16/10] md:aspect-[16/7]">
+            <div className="md:hidden">
+              <Stardust seed={seedOf(course.slug)} density={1.3} />
+            </div>
+            <div className="hidden md:block">
+              <Stardust seed={seedOf(course.slug)} density={2} w={230} h={100} />
+            </div>
+            <div className="absolute inset-0 flex flex-col items-center justify-center px-[24%] pb-[4%] text-center md:px-[36%]">
+              <p className="font-serif text-[14px] italic text-gold/90">
                 {tr(categories[course.category], locale)} · {d.course.level[course.level]}
               </p>
-              <h1 className="mt-3 font-serif text-[36px] font-semibold leading-tight tracking-tight md:text-[48px]">
+              <h1 className="mt-3 font-serif text-[30px] font-medium leading-tight text-gold-light md:text-[40px]">
                 {tr(course.title, locale)}
               </h1>
-              <p className="mt-2 font-serif text-[19px] italic text-gold-light/90">{tr(course.subtitle, locale)}</p>
-              <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-white/70">{tr(course.description, locale)}</p>
-              <div className="mt-8">
-                <CourseActions
-                  courseSlug={course.slug}
-                  lessonIds={lessons.map((l) => l.id)}
-                  basePath={base}
-                  labels={{ start: d.course.start, continue: d.course.continue, progress: d.course.progress }}
-                />
-              </div>
             </div>
-            <Cover hue={course.hue} category={course.category} className="gold-frame hidden aspect-[4/5] rounded-[20px] md:block" />
           </div>
-          <dl className="grid grid-cols-3 border-t border-white/10">
-            {facts.map((f, i) => (
-              <div key={f.k} className={`px-3 py-5 text-center ${i > 0 ? "border-l border-white/10" : ""}`}>
-                <dt className="font-serif text-[18px] font-semibold text-gold-light">{f.k}</dt>
-                <dd className="mt-0.5 text-[12px] tracking-wide text-white/55">{f.v}</dd>
-              </div>
-            ))}
-          </dl>
+        </div>
+        <div className="mx-auto mt-7 flex max-w-6xl flex-col items-center gap-4">
+          <CourseActions
+            courseSlug={course.slug}
+            lessonIds={lessons.map((l) => l.id)}
+            basePath={base}
+            labels={{ start: d.course.start, continue: d.course.continue, progress: d.course.progress }}
+          />
+          <p className="text-[12.5px] tracking-wide text-muted">
+            {course.modules.length}
+            {locale === "ko" ? "" : " "}
+            {d.course.weeks}
+            <span className="mx-1.5 text-gold">·</span>
+            {lessons.length} {d.course.lessons}
+            <span className="mx-1.5 text-gold">·</span>
+            {totalMinutes(course)}
+            {d.course.minutes}
+            <span className="mx-1.5 text-gold">·</span>
+            {d.common.free}
+          </p>
         </div>
       </section>
 
-      <div className="mx-auto grid max-w-6xl gap-12 px-4 py-14 md:px-6 lg:grid-cols-[1fr_20rem]">
-        <section>
-          <p className="eyebrow">CURRICULUM</p>
-          <h2 className="mt-1.5 font-serif text-[30px] font-semibold">{d.course.curriculum}</h2>
-          <div className="mt-6 space-y-4">
-            {course.modules.map((m, mi) => (
-              <ModuleCard
-                key={mi}
-                index={mi}
-                courseSlug={course.slug}
-                basePath={base}
-                title={tr(m.title, locale)}
-                lessonIds={m.lessons.map((l) => l.id)}
-                labels={d.my}
-              >
-                <ul className="border-t border-line/80">
-                  {m.lessons.map((l) => (
-                    <li key={l.id}>
-                      <Link href={`${base}/learn/${l.id}`} className="flex items-center gap-3.5 px-5 py-3.5 transition hover:bg-surface/70">
-                        <LessonCheck courseSlug={course.slug} lessonId={l.id} />
-                        <span className="flex-1 text-[15px]">{tr(l.title, locale)}</span>
-                        <span className="flex shrink-0 items-center gap-1.5 text-[12.5px] text-muted">
-                          <LessonIcon type={l.type} />
-                          {l.minutes}
-                          {d.course.minutes}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </ModuleCard>
-            ))}
-          </div>
-        </section>
-
-        <aside className="space-y-8 lg:pt-12">
-          <div>
-            <h2 className="label-gold">{d.course.outcomes}</h2>
-            <ul className="mt-4 space-y-3.5 text-[15px]">
-              {course.outcomes.map((o, i) => (
-                <li key={i} className="flex gap-3 border-b border-line/80 pb-3.5">
-                  <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rotate-45 bg-gold" aria-hidden />
-                  {tr(o, locale)}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="rounded-[22px] border border-gold/30 bg-white/70 p-6">
-            <h2 className="label-gold">{d.course.instructor}</h2>
-            <p className="mt-3 font-serif text-[18px] italic leading-snug">{d.course.instructorBody}</p>
-          </div>
-        </aside>
-      </div>
+      <section className="mx-auto max-w-3xl px-4 pt-16 md:px-6">
+        <SectionHead title={d.course.curriculum} className="mb-8" />
+        <div className="space-y-4">
+          {course.modules.map((m, mi) => (
+            <ModuleCard
+              key={mi}
+              index={mi}
+              courseSlug={course.slug}
+              basePath={base}
+              title={tr(m.title, locale)}
+              lessonIds={m.lessons.map((l) => l.id)}
+              labels={d.my}
+            >
+              <ul className="border-t border-line/80">
+                {m.lessons.map((l) => (
+                  <li key={l.id}>
+                    <Link href={`${base}/learn/${l.id}`} className="flex items-center gap-3.5 px-5 py-3.5 transition hover:bg-surface/60">
+                      <LessonCheck courseSlug={course.slug} lessonId={l.id} />
+                      <span className="flex-1 text-[15px]">{tr(l.title, locale)}</span>
+                      <span className="flex shrink-0 items-center gap-1.5 text-[12.5px] text-muted">
+                        <LessonIcon type={l.type} />
+                        {l.minutes}
+                        {d.course.minutes}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </ModuleCard>
+          ))}
+        </div>
+      </section>
     </>
   );
 }

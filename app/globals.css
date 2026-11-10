@@ -2,42 +2,47 @@
 @import "@fontsource/cormorant-garamond/500.css";
 @import "@fontsource/cormorant-garamond/600.css";
 @import "@fontsource/cormorant-garamond/500-italic.css";
+@import "@fontsource/cormorant-garamond/400-italic.css";
+@import "@fontsource/noto-serif-kr/500.css";
 @import "@fontsource/noto-serif-kr/600.css";
 @import "tailwindcss";
 
 /*
- * 아루벤 디자인 토큰
- * 밤하늘 자두빛(night) 위에 샴페인 골드(gold)를 아껴 쓰는 구성.
- * 제목은 세리프(Cormorant + Noto Serif KR), 본문은 Pretendard.
+ * Aruven 디자인 토큰
+ * 남색 밤하늘(deep/night) 위에 샴페인 골드 별가루. 글씨는 가는 세리프.
  */
 @theme {
-  --color-ink: #1f1733;
-  --color-muted: #6f6681;
-  --color-line: #e8e1ee;
-  --color-ivory: #fbf9fc;
-  --color-surface: #f4eff7;
-  --color-night: #1b1331;
-  --color-night-2: #2c1f4d;
-  --color-primary: #5e40a5;
-  --color-primary-dark: #48308a;
-  --color-primary-soft: #efe8f8;
-  --color-plum: #8b509f;
-  --color-gold: #b08d55;
-  --color-gold-light: #dcc495;
+  --color-ivory: #262b41;
+  --color-deep: #2d3350;
+  --color-night: #1f2337;
+  --color-night-2: #343a5a;
+  --color-surface: #323856;
+  --color-line: #3e4463;
+  --color-ink: #ece4d3;
+  --color-muted: #9c9eb4;
+  --color-primary: #a99fd8;
+  --color-primary-dark: #8f86c9;
+  --color-primary-soft: #353b5c;
+  --color-plum: #c3a7da;
+  --color-gold: #c7ad80;
+  --color-gold-light: #e6d5ae;
   --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   --font-serif: "Cormorant Garamond", "Noto Serif KR", "Nanum Myeongjo", Georgia, serif;
 }
 
 html {
   scroll-behavior: smooth;
+  /* 한글 명조에는 기울임체가 없어 억지로 기울이지 않음 (영문 Cormorant만 기울임) */
+  font-synthesis-style: none;
 }
 
 body {
   background:
-    radial-gradient(60rem 26rem at 90% -6rem, rgba(170, 140, 230, 0.16), transparent 70%),
+    radial-gradient(50rem 30rem at 85% -10rem, rgba(120, 130, 200, 0.18), transparent 70%),
     var(--color-ivory);
   background-repeat: no-repeat;
   color: var(--color-ink);
+  color-scheme: dark;
   -webkit-font-smoothing: antialiased;
   word-break: keep-all;
 }
@@ -74,68 +79,50 @@ h1, h2 {
     color: var(--color-gold);
   }
 
-  /* 주 버튼: 자수정 그라디언트 알약 + 금빛 테두리 */
+  /* 주 버튼: 샴페인 골드 알약 */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.6rem;
     border-radius: 9999px;
-    padding: 0.85rem 1.6rem;
+    padding: 0.85rem 1.7rem;
     font-size: 15px;
     font-weight: 600;
-    letter-spacing: 0.02em;
-    color: #fff;
-    background: linear-gradient(135deg, #3a2570 0%, #6243a6 55%, #8b509f 100%);
-    box-shadow:
-      inset 0 0 0 1px rgba(220, 196, 149, 0.55),
-      0 10px 28px -12px rgba(70, 40, 130, 0.65);
-    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    letter-spacing: 0.03em;
+    color: #1f2337;
+    background: linear-gradient(135deg, #eadbb6 0%, #c7ad80 100%);
+    box-shadow: 0 10px 30px -14px rgba(230, 210, 160, 0.55);
+    transition: transform 0.2s ease, filter 0.2s ease;
   }
   .btn-primary:hover {
-    filter: brightness(1.08);
+    filter: brightness(1.06);
     transform: translateY(-1px);
-    box-shadow:
-      inset 0 0 0 1px rgba(220, 196, 149, 0.8),
-      0 14px 32px -12px rgba(70, 40, 130, 0.75);
   }
 
   /* 보조 버튼: 금빛 실선 알약 */
-  .btn-ghost {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    border-radius: 9999px;
-    border: 1px solid rgba(176, 141, 85, 0.55);
-    background: rgba(255, 255, 255, 0.65);
-    padding: 0.5rem 1.05rem;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--color-ink);
-    transition: background 0.2s ease, border-color 0.2s ease;
-  }
-  .btn-ghost:hover {
-    background: #fff;
-    border-color: var(--color-gold);
-  }
-
-  /* 어두운 배경 위 보조 버튼 */
+  .btn-ghost,
   .btn-ghost-dark {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.45rem;
     border-radius: 9999px;
-    border: 1px solid rgba(220, 196, 149, 0.5);
-    padding: 0.85rem 1.5rem;
-    font-size: 15px;
+    border: 1px solid rgba(199, 173, 128, 0.5);
+    padding: 0.55rem 1.1rem;
+    font-size: 14px;
     font-weight: 600;
     color: var(--color-gold-light);
-    transition: background 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
   }
+  .btn-ghost-dark {
+    padding: 0.85rem 1.5rem;
+    font-size: 15px;
+  }
+  .btn-ghost:hover,
   .btn-ghost-dark:hover {
-    background: rgba(220, 196, 149, 0.1);
+    background: rgba(199, 173, 128, 0.1);
+    border-color: var(--color-gold);
   }
 
   /* 금빛 화살표 글자 링크 */
@@ -152,24 +139,39 @@ h1, h2 {
     gap: 0.5rem;
   }
 
-  /* 밤하늘 배경 (별빛 포함) */
+  /* 진한 남색 판 (별빛 포함) */
   .night {
     background:
-      radial-gradient(circle at 14% 22%, rgba(255, 255, 255, 0.85) 0 1px, transparent 1.6px),
-      radial-gradient(circle at 72% 14%, rgba(255, 255, 255, 0.7) 0 1px, transparent 1.6px),
-      radial-gradient(circle at 86% 58%, rgba(255, 240, 210, 0.8) 0 1.2px, transparent 2px),
-      radial-gradient(circle at 38% 74%, rgba(255, 255, 255, 0.6) 0 0.8px, transparent 1.5px),
-      radial-gradient(circle at 58% 40%, rgba(255, 255, 255, 0.5) 0 0.8px, transparent 1.5px),
-      radial-gradient(circle at 24% 90%, rgba(255, 240, 210, 0.6) 0 1px, transparent 1.6px),
-      radial-gradient(70% 90% at 100% 0%, rgba(160, 110, 200, 0.45), transparent 60%),
-      radial-gradient(60% 80% at 0% 100%, rgba(90, 70, 180, 0.35), transparent 60%),
-      linear-gradient(160deg, #1b1331 0%, #2c1f4d 100%);
-    color: #f3eef8;
+      radial-gradient(circle at 14% 22%, rgba(255, 245, 220, 0.7) 0 0.8px, transparent 1.4px),
+      radial-gradient(circle at 72% 14%, rgba(255, 245, 220, 0.6) 0 0.8px, transparent 1.4px),
+      radial-gradient(circle at 86% 58%, rgba(255, 240, 210, 0.7) 0 1px, transparent 1.6px),
+      radial-gradient(circle at 38% 74%, rgba(255, 245, 220, 0.5) 0 0.7px, transparent 1.3px),
+      radial-gradient(circle at 58% 40%, rgba(255, 245, 220, 0.45) 0 0.7px, transparent 1.3px),
+      radial-gradient(circle at 24% 90%, rgba(255, 240, 210, 0.5) 0 0.8px, transparent 1.4px),
+      var(--color-deep);
+    color: var(--color-ink);
+  }
+
+  /* 양옆 금색 가는 선이 있는 제목 */
+  .lined {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .lined::before,
+  .lined::after {
+    content: "";
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(90deg, transparent, rgba(199, 173, 128, 0.55));
+  }
+  .lined::after {
+    background: linear-gradient(90deg, rgba(199, 173, 128, 0.55), transparent);
   }
 
   /* 금빛 테두리 액자 */
   .gold-frame {
-    box-shadow: inset 0 0 0 1px rgba(220, 196, 149, 0.55);
+    box-shadow: inset 0 0 0 1px rgba(199, 173, 128, 0.35);
   }
 }
 

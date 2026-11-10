@@ -138,7 +138,7 @@ export function ModuleCard({
   const href = `${basePath}/learn/${nextLesson(lessonIds, done, entry?.last)}`;
 
   return (
-    <div className="overflow-hidden rounded-[22px] border border-line bg-white/80">
+    <div className="overflow-hidden rounded-[22px] border border-line bg-deep/70">
       <div className="flex items-center gap-4 px-5 py-5">
         <ProgressRing value={pct} />
         <div className="min-w-0 flex-1">

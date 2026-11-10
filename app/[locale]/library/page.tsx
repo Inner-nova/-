@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ebooks } from "@/lib/content";
 import { getDictionary, isLocale } from "@/lib/i18n";
-import { EbookRow } from "@/components/EbookCard";
+import { EbookCard } from "@/components/EbookCard";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/library">): Promise<Metadata> {
   const { locale } = await params;
@@ -15,12 +15,10 @@ export default async function LibraryPage({ params }: PageProps<"/[locale]/libra
   const d = getDictionary(locale);
   return (
     <div className="mx-auto max-w-6xl px-4 pt-10 md:px-6 md:pt-14">
-      <p className="eyebrow">FREE LIBRARY</p>
-      <h1 className="mt-2 font-serif text-[40px] font-semibold leading-tight tracking-tight">{d.library.title}</h1>
-      <p className="mt-2 text-muted">{d.library.body}</p>
-      <div className="mt-10 grid gap-5 md:grid-cols-2">
+      <h1 className="text-center font-serif text-[34px] font-medium italic text-gold-light">{d.library.title}</h1>
+      <div className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-x-5 gap-y-10 md:gap-x-10">
         {ebooks.map((e) => (
-          <EbookRow key={e.slug} ebook={e} locale={locale} d={d} />
+          <EbookCard key={e.slug} ebook={e} locale={locale} d={d} />
         ))}
       </div>
     </div>

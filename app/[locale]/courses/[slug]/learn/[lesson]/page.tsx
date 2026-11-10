@@ -7,6 +7,7 @@ import { LessonCheck, LessonCompleteBar } from "@/components/LessonControls";
 import { LessonIcon } from "@/components/LessonIcon";
 import { BreathGuide } from "@/components/BreathGuide";
 import { Cover } from "@/components/Cover";
+import { seedOf } from "@/components/Stardust";
 import { ChevronIcon, PlayIcon } from "@/components/Icons";
 
 type P = PageProps<"/[locale]/courses/[slug]/learn/[lesson]">;
@@ -41,12 +42,12 @@ export default async function LessonPage({ params }: P) {
   return (
     <div className="mx-auto grid max-w-6xl gap-10 px-4 py-8 md:px-6 lg:grid-cols-[18rem_1fr]">
       <aside className="order-2 lg:order-1">
-        <div className="sticky top-24 overflow-hidden rounded-[22px] border border-line bg-white/80">
+        <div className="sticky top-24 overflow-hidden rounded-[22px] border border-line bg-deep/70">
           <Link href={base} className="flex items-center gap-1 px-5 pt-5 text-[13px] text-muted hover:text-ink">
             <ChevronIcon dir="left" size={14} />
             {d.lesson.backToCourse}
           </Link>
-          <p className="px-5 pb-2 pt-2 font-serif text-[21px] font-semibold leading-snug">{tr(course.title, locale)}</p>
+          <p className="px-5 pb-2 pt-2 font-serif text-[20px] font-medium leading-snug text-gold-light">{tr(course.title, locale)}</p>
           <nav className="max-h-[60vh] overflow-y-auto pb-3">
             {course.modules.map((m, mi) => (
               <div key={mi} className="pt-3">
@@ -75,7 +76,7 @@ export default async function LessonPage({ params }: P) {
 
       <article className="order-1 min-w-0 lg:order-2">
         {lesson.type === "video" && (
-          <Cover hue={course.hue} className="gold-frame mb-8 flex aspect-video items-center justify-center rounded-[22px]">
+          <Cover seed={seedOf(lesson.id)} oval className="gold-frame mb-8 flex aspect-video items-center justify-center rounded-[6px]">
             <div className="relative flex flex-col items-center gap-3">
               <span className="flex h-16 w-16 items-center justify-center rounded-full border border-gold-light/70 bg-night/40 text-gold-light backdrop-blur">
                 <PlayIcon size={26} />
@@ -99,7 +100,7 @@ export default async function LessonPage({ params }: P) {
             {String(index + 1).padStart(2, "0")} / {String(all.length).padStart(2, "0")}
           </span>
         </div>
-        <h1 className="mt-3 font-serif text-[34px] font-semibold leading-tight tracking-tight md:text-[42px]">{tr(lesson.title, locale)}</h1>
+        <h1 className="mt-3 font-serif text-[32px] font-medium leading-tight text-gold-light md:text-[40px]">{tr(lesson.title, locale)}</h1>
         <div className="mt-5 h-px w-16 bg-gold/60" />
 
         <div className="mt-7 max-w-[38rem] space-y-6 text-[17px] leading-[1.95] text-ink/85">
@@ -115,7 +116,7 @@ export default async function LessonPage({ params }: P) {
         )}
 
         {lesson.practice && (
-          <aside className="mt-12 rounded-[22px] border border-gold/35 bg-white/70 px-6 py-6 md:px-8">
+          <aside className="mt-12 rounded-[22px] border border-gold/35 bg-deep/60 px-6 py-6 md:px-8">
             <p className="label-gold">{d.lesson.practice}</p>
             <p className="mt-3 font-serif text-[21px] font-medium italic leading-snug">{tr(lesson.practice, locale)}</p>
           </aside>

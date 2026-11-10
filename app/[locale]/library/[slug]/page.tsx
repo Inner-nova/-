@@ -30,12 +30,11 @@ export default async function EbookPage({ params }: PageProps<"/[locale]/library
       </Link>
 
       <header className="mt-10 flex flex-col items-center text-center">
-        <BookCover ebook={book} locale={locale} className="h-64 w-48 shadow-[0_28px_50px_-22px_rgba(40,20,80,0.7)]" />
-        <p className="label-gold mt-10">
+        <BookCover ebook={book} locale={locale} className="h-72 w-56 shadow-[0_28px_50px_-22px_rgba(0,0,0,0.8)]" />
+        <p className="mt-6 text-[12.5px] tracking-wide text-muted">
           {d.common.ebook} · {fill(d.library.readTime, { n: ebookMinutes(book) })}
         </p>
-        <h1 className="mt-3 font-serif text-[40px] font-semibold leading-tight tracking-tight">{tr(book.title, locale)}</h1>
-        <p className="mt-2 font-serif text-[19px] italic text-muted">{tr(book.subtitle, locale)}</p>
+        <h1 className="sr-only">{tr(book.title, locale)}</h1>
       </header>
 
       <nav className="mt-12 border-y border-gold/30 py-6" aria-label={d.library.toc}>
@@ -58,9 +57,9 @@ export default async function EbookPage({ params }: PageProps<"/[locale]/library
             <p className="text-center font-serif text-[15px] italic text-gold">
               {locale === "ko" ? `제${i + 1}장` : `Chapter ${i + 1}`}
             </p>
-            <h2 className="mt-2 text-center font-serif text-[30px] font-semibold leading-tight">{tr(c.title, locale)}</h2>
+            <h2 className="mt-2 text-center font-serif text-[28px] font-medium leading-tight text-gold-light">{tr(c.title, locale)}</h2>
             <div className="mx-auto mt-5 h-px w-12 bg-gold/60" />
-            <div className="mt-8 space-y-6 font-serif text-[19px] leading-[1.95] text-ink/90">
+            <div className="mt-8 space-y-6 font-serif text-[18px] leading-[2] text-ink/85">
               {c.body[locale].map((p, j) => (
                 <p key={j}>{p}</p>
               ))}

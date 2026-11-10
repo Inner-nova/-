@@ -23,8 +23,7 @@ export default async function MyPage({ params }: PageProps<"/[locale]/my">) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 pt-10 md:px-6 md:pt-14">
-      <p className="eyebrow">{d.my.eyebrow}</p>
-      <h1 className="mt-2 font-serif text-[40px] font-semibold leading-tight tracking-tight">{d.my.title}</h1>
+      <h1 className="text-center font-serif text-[34px] font-medium italic text-gold-light">{d.my.title}</h1>
       <MyLearning locale={locale} courses={summary} labels={{ ...d.my }} />
     </div>
   );

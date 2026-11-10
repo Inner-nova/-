@@ -30,13 +30,13 @@ export function BreathGuide({ labels }: { labels: Labels }) {
         <div className="absolute inset-0 rounded-full border border-gold-light/30" />
         <div className="absolute inset-6 rounded-full border border-white/10" />
         <div
-          className="absolute inset-5 rounded-full bg-[radial-gradient(circle_at_40%_35%,rgba(255,240,215,0.95),rgba(190,160,235,0.55)_45%,rgba(120,80,190,0.15)_75%)] shadow-[0_0_60px_rgba(200,170,255,0.35)]"
+          className="absolute inset-5 rounded-full bg-[radial-gradient(circle_at_40%_35%,rgba(255,244,222,0.95),rgba(220,198,155,0.55)_45%,rgba(199,173,128,0.08)_75%)] shadow-[0_0_60px_rgba(230,210,160,0.3)]"
           style={{
             transform: `scale(${scale})`,
             transition: `transform ${running ? PHASES[phase].ms : 600}ms ease-in-out`,
           }}
         />
-        <span className="relative font-serif text-[22px] font-semibold text-night" aria-live="polite">
+        <span className="relative font-serif text-[22px] font-medium text-night" aria-live="polite">
           {running ? labels[current] : ""}
         </span>
       </div>

@@ -29,15 +29,15 @@ export function CategoryFilter({ allLabel, categories, gridClass, children }: Pr
 
   return (
     <>
-      <div className="no-scrollbar -mx-4 mb-10 mt-8 flex gap-6 overflow-x-auto border-b border-line px-4 md:mx-0 md:px-0" role="group">
+      <div className="no-scrollbar -mx-4 mb-10 mt-6 flex justify-start gap-6 overflow-x-auto border-b border-line px-4 sm:justify-center md:mx-0 md:px-0" role="group">
         {options.map((o) => (
           <button
             key={o.key}
             type="button"
             onClick={() => select(o.key)}
             aria-pressed={active === o.key}
-            className={`-mb-px shrink-0 border-b-2 pb-3 font-serif text-[18px] font-semibold transition ${
-              active === o.key ? "border-gold text-ink" : "border-transparent text-muted hover:text-ink"
+            className={`-mb-px shrink-0 border-b pb-3 font-serif text-[16px] font-medium transition ${
+              active === o.key ? "border-gold text-gold-light" : "border-transparent text-muted hover:text-ink"
             }`}
           >
             {o.label}

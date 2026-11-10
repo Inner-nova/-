@@ -11,7 +11,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/courses"
   return isLocale(locale) ? { title: getDictionary(locale).course.catalogTitle } : {};
 }
 
-const GRID = "grid grid-cols-1 gap-x-6 gap-y-12 min-[420px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4";
+const GRID = "grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-3 md:gap-x-8 lg:grid-cols-4";
 
 export default async function CoursesPage({ params }: PageProps<"/[locale]/courses">) {
   const { locale } = await params;
@@ -25,12 +25,10 @@ export default async function CoursesPage({ params }: PageProps<"/[locale]/cours
 
   return (
     <div className="mx-auto max-w-6xl px-4 pt-10 md:px-6 md:pt-14">
-      <p className="eyebrow">ALL COURSES</p>
-      <h1 className="mt-2 font-serif text-[40px] font-semibold leading-tight tracking-tight">{d.course.catalogTitle}</h1>
-      <p className="mt-2 text-muted">{d.course.catalogBody}</p>
+      <h1 className="text-center font-serif text-[34px] font-medium italic text-gold-light">{d.course.catalogTitle}</h1>
       <Suspense
         fallback={
-          <div className={`mt-[92px] ${GRID}`}>
+          <div className={`mt-[84px] ${GRID}`}>
             {cards.map(({ node }) => (
               <div key={node.key}>{node}</div>
             ))}

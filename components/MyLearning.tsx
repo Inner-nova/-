@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useProgress } from "@/lib/progress";
 import { ModuleCard, ProgressRing, useCourseState, type ModuleLabels } from "./CourseProgress";
 import { ArrowIcon, ChevronIcon } from "./Icons";
+import { Stardust, seedOf } from "./Stardust";
 
 type CourseSummary = {
   slug: string;
@@ -35,8 +36,7 @@ export function MyLearning({ locale, courses, labels }: { locale: string; course
   if (started.length === 0) {
     return (
       <div className="night mt-10 rounded-[26px] px-6 py-14 text-center">
-        <p className="font-serif text-[24px] font-semibold">{labels.empty}</p>
-        <p className="mt-2 text-white/65">{labels.emptyBody}</p>
+        <p className="font-serif text-[22px] font-medium text-gold-light">{labels.empty}</p>
         <Link href={`/${locale}/courses`} className="btn-primary mt-7">
           {labels.browse} <ArrowIcon size={16} />
         </Link>
@@ -66,12 +66,14 @@ function CourseGroup({ locale, course, labels }: { locale: string; course: Cours
   const { pct, next } = useCourseState(course.slug, allIds);
 
   return (
-    <section className="overflow-hidden rounded-[26px] border border-line bg-white/60">
+    <section className="overflow-hidden rounded-[26px] border border-line bg-deep/50">
       <div className="night flex items-center gap-4 px-5 py-5">
-        <span className="cover gold-frame h-16 w-14 shrink-0 rounded-xl" style={{ ["--hue" as string]: course.hue }} />
+        <span className="gold-frame relative h-16 w-14 shrink-0 overflow-hidden rounded-[4px] bg-night">
+          <Stardust seed={seedOf(course.slug)} density={0.4} />
+        </span>
         <div className="min-w-0 flex-1">
           <p className="label-gold !text-gold-light">{course.category}</p>
-          <Link href={base} className="mt-1 block font-serif text-[21px] font-semibold leading-snug hover:underline">
+          <Link href={base} className="mt-1 block font-serif text-[20px] font-medium leading-snug text-gold-light hover:underline">
             {course.title}
           </Link>
         </div>
