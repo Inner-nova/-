@@ -15,7 +15,7 @@ import Courses from "@/app/[locale]/courses/page";
 import Course from "@/app/[locale]/courses/[slug]/page";
 import Lesson from "@/app/[locale]/courses/[slug]/learn/[lesson]/page";
 import Ebook from "@/app/[locale]/library/[slug]/page";
-import Search from "@/app/[locale]/search/page";
+import My from "@/app/[locale]/my/page";
 
 type PageFn = (props: { params: Promise<Record<string, string>> }) => Promise<ReactNode>;
 
@@ -30,8 +30,8 @@ function match(path: string): { page?: PageFn; params?: Record<string, string>; 
   if (a === "courses" && c === "learn" && seg.length === 5) return { page: Lesson as PageFn, params: p({ slug: b, lesson: d }) };
   if (a === "library" && seg.length === 2) return { redirect: `/${locale}/courses?category=ebook` };
   if (a === "library" && seg.length === 3) return { page: Ebook as PageFn, params: p({ slug: b }) };
-  if (a === "my" && seg.length === 2) return { redirect: `/${locale}/courses` };
-  if (a === "search" && seg.length === 2) return { page: Search as PageFn, params: p() };
+  if (a === "my" && seg.length === 2) return { page: My as PageFn, params: p() };
+  if (a === "search" && seg.length === 2) return { redirect: `/${locale}/courses` };
   return null;
 }
 

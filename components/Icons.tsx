@@ -156,3 +156,12 @@ export const TelescopeIcon = (p: P) => (
     <path d="M5.5 3.5v2.2M4.4 4.6h2.2" />
   </Base>
 );
+
+/* 마이: 별 하나를 품은 사람 */
+export const SelfIcon = (p: P) => (
+  <Base {...p}>
+    <circle cx="12" cy="8" r="3.6" />
+    <path d="M4.5 20.5c.8-3.8 3.8-6 7.5-6s6.7 2.2 7.5 6" />
+    <path d="M19 2.8v2.4M17.8 4h2.4" />
+  </Base>
+);

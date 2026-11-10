@@ -2,12 +2,12 @@ import Link from "next/link";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Wordmark } from "./Logo";
-import { TelescopeIcon } from "./Icons";
 
 export function Header({ locale, d }: { locale: Locale; d: Dictionary }) {
   const nav = [
     { href: `/${locale}`, label: d.nav.explore },
     { href: `/${locale}/courses`, label: d.nav.courses },
+    { href: `/${locale}/my`, label: d.nav.my },
   ];
   return (
     <header className="sticky top-0 z-30 border-b border-line/70 bg-ivory/80 backdrop-blur-md">
@@ -27,13 +27,6 @@ export function Header({ locale, d }: { locale: Locale; d: Dictionary }) {
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-2">
-          <Link
-            href={`/${locale}/search`}
-            aria-label={d.nav.search}
-            className="hidden h-9 w-9 items-center justify-center rounded-full text-muted transition hover:text-ink md:flex"
-          >
-            <TelescopeIcon size={20} />
-          </Link>
           <LanguageSwitcher locale={locale} />
         </div>
       </div>

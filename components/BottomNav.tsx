@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { Dictionary, Locale } from "@/lib/i18n";
-import { MoonIcon, SparkleIcon, TelescopeIcon } from "./Icons";
+import { MoonIcon, SelfIcon, SparkleIcon } from "./Icons";
 
 /** 모바일 하단 탭바: 밤하늘색 바, 선택된 탭은 금빛 아이콘과 점으로 표시 (데스크톱에서는 숨김) */
 export function BottomNav({ locale, d }: { locale: Locale; d: Dictionary }) {
@@ -11,7 +11,7 @@ export function BottomNav({ locale, d }: { locale: Locale; d: Dictionary }) {
   const tabs: { href: string; label: string; Icon: typeof MoonIcon; exact?: boolean; also?: string[] }[] = [
     { href: `/${locale}`, label: d.nav.explore, Icon: SparkleIcon, exact: true },
     { href: `/${locale}/courses`, label: d.nav.courses, Icon: MoonIcon, also: [`/${locale}/library`] },
-    { href: `/${locale}/search`, label: d.nav.search, Icon: TelescopeIcon },
+    { href: `/${locale}/my`, label: d.nav.my, Icon: SelfIcon },
   ];
 
   return (
