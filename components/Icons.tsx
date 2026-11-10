@@ -145,3 +145,14 @@ export const MoonIcon = (p: P) => (
     <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
   </Base>
 );
+
+/* 검색: 밤하늘을 들여다보는 망원경 */
+export const TelescopeIcon = (p: P) => (
+  <Base {...p}>
+    <path d="M5.2 11.4 16.2 5.9l1.9 3.8-11 5.5Z" />
+    <path d="m2.3 13 2.5-1.3 1.6 3.2-2.5 1.3Z" />
+    <path d="m16.2 5.9 2.6-1.3 1.9 3.8-2.6 1.3" />
+    <path d="M11.4 12.3 7.6 21M11.4 12.3l3.8 8.7" />
+    <path d="M5.5 3.5v2.2M4.4 4.6h2.2" />
+  </Base>
+);

@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { Dictionary, Locale } from "@/lib/i18n";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { Wordmark } from "./Logo";
-import { SearchIcon } from "./Icons";
+import { TelescopeIcon } from "./Icons";
 
 export function Header({ locale, d }: { locale: Locale; d: Dictionary }) {
   const nav = [
@@ -32,7 +32,7 @@ export function Header({ locale, d }: { locale: Locale; d: Dictionary }) {
             aria-label={d.nav.search}
             className="hidden h-9 w-9 items-center justify-center rounded-full text-muted transition hover:text-ink md:flex"
           >
-            <SearchIcon size={19} />
+            <TelescopeIcon size={20} />
           </Link>
           <LanguageSwitcher locale={locale} />
         </div>
